@@ -1,0 +1,6 @@
+# config/locales/ar_ja.yml
+ja:
+  activerecord:
+    models:
+
+    attributes:
