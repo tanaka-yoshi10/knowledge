@@ -88,6 +88,8 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
+    erb2haml (0.1.5)
+      html2haml
     erubis (2.7.0)
     eventmachine (1.0.8)
     execjs (2.6.0)
@@ -118,11 +120,24 @@ GEM
       guard (~> 2.8)
       guard-compat (~> 1.0)
       multi_json (~> 1.8)
+    haml (4.0.7)
+      tilt
+    haml-rails (0.9.0)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 4.0.6, < 5.0)
+      html2haml (>= 1.0.1)
+      railties (>= 4.0.1)
     hashie (3.4.3)
     hirb (0.7.3)
     hirb-unicode (0.0.5)
       hirb (~> 0.5)
       unicode-display_width (~> 0.1.1)
+    html2haml (2.0.0)
+      erubis (~> 2.7.0)
+      haml (~> 4.0.0)
+      nokogiri (~> 1.6.0)
+      ruby_parser (~> 3.5)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     jbuilder (2.3.2)
@@ -257,6 +272,8 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-graphviz (1.2.2)
     ruby-progressbar (1.7.5)
+    ruby_parser (3.7.2)
+      sexp_processor (~> 4.1)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -267,6 +284,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sexp_processor (4.6.0)
     shellany (0.0.1)
     shoulda-matchers (3.0.0)
       activesupport (>= 4.0.0)
@@ -319,10 +337,12 @@ DEPENDENCIES
   coffee-rails
   database_cleaner
   devise
+  erb2haml
   factory_girl_rails
   faker
   faker-japanese
   guard-livereload
+  haml-rails
   hirb
   hirb-unicode
   jbuilder

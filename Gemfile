@@ -27,8 +27,8 @@ group :development do
   gem 'rails-erd'
   gem 'spring-commands-rspec'
   gem 'bullet'
-
   gem 'rubocop', require: false
+  gem 'erb2haml'
 end
 
 group :development, :test do
@@ -59,3 +59,4 @@ end
 
 gem 'devise'
 gem 'omniauth-twitter'
+gem 'haml-rails'
