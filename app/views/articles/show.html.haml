@@ -6,4 +6,4 @@
   = @article.title
 %p
   %strong Body:
-  = @article.body
+  = markdown_to_html(@article.body)
