@@ -6,8 +6,10 @@
   %thead
     %tr
       %th Title
+      %th Author
 
   %tbody
-    - current_user.articles.each do |article|
+    - @articles.each do |article|
       %tr
         %td= link_to article.title, article
+        %td= article.user.username
