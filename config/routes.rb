@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :articles
+  resources :users, only: :show
 end
