@@ -1,2 +1,13 @@
 %h1 Pages#index
 %p Find me in app/views/pages/index.html.erb
+%h1 Listing Articles
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Title
+
+  %tbody
+    - current_user.articles.each do |article|
+      %tr
+        %td= link_to article.title, article
