@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:twitter]
   has_many :articles
+  has_many :stocks
   validates :username, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
@@ -23,5 +24,9 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+
+  def stocked?(article)
+    self.stocks.any?{|s| s.article == article}
   end
 end
