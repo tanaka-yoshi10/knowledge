@@ -27,6 +27,6 @@ class User < ActiveRecord::Base
   end
 
   def stocked?(article)
-    self.stocks.any?{|s| s.article == article}
+    self.stocks.any?{|s| s.article_id == article.id}
   end
 end
