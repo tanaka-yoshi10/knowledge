@@ -13,3 +13,17 @@
       %tr
         %td= link_to article.title, article
         %td= link_to article.user.username, article.user
+
+%h1 Stocked Articles
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Title
+      %th Author
+
+  %tbody
+    - @stocked_articles.each do |article|
+      %tr
+        %td= link_to article.title, article
+        %td= link_to article.user.username, article.user
