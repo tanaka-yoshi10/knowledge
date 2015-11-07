@@ -5,7 +5,7 @@
   %strong Title:
   = @article.title
 - unless @article.user == current_user
-  - if current_user.stocked?(@article)
+  - if current_user.stocking?(@article)
     = link_to 'ストック解除', [@article, current_user.stocks.where(article_id: @article).first], :method => :delete, :class => 'btn btn-primary'
   - else
     = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
