@@ -1,17 +1,18 @@
 class StocksController < ApplicationController
+  before_action :set_article
+
   def create
-    article = Article.find(params[:article_id])
-    stock = current_user.stocks.build do |s|
-      s.article = article
-    end
-    stock.save
-    redirect_to article
+    current_user.stock!(@article)
+    redirect_to @article
   end
 
   def destroy
-    stock = Stock.find(params[:id])
-    stock.destroy
-    article = Article.find(params[:article_id])
-    redirect_to article
+    current_user.unstock!(@article)
+    redirect_to @article
+  end
+
+  private
+  def set_article
+    @article = Article.find(params[:article_id])
   end
 end

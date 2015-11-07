@@ -27,18 +27,14 @@ class User < ActiveRecord::Base
   end
 
   def stock!(article)
-    stock = stocks.build do |s|
-      s.article = article
-    end
-    stock.save!
+    stocks.create!(article: article)
   end
 
   def unstock!(article)
-    stock = stocks.find_by(article_id: article.id)
-    stock.destroy
+    stocks.find_by(article: article).destroy
   end
 
   def stocking?(article)
-    self.stocks.any?{|s| s.article_id == article.id}
+    stocks.find_by(article: article)
   end
 end
