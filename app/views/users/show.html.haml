@@ -1,1 +1,13 @@
 %h1= @user.username
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Title
+      %th Author
+
+  %tbody
+    - @user.articles.each do |article|
+      %tr
+        %td= link_to article.title, article
+        %td= link_to article.user.username, article.user
