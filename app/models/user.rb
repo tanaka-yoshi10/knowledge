@@ -37,4 +37,8 @@ class User < ActiveRecord::Base
   def stocking?(article)
     stocks.find_by(article: article)
   end
+
+  def following?(other_user)
+    false
+  end
 end

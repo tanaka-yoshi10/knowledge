@@ -1,5 +1,11 @@
 %h1= @user.username
 
+- unless @user == current_user
+  - if current_user.following?(@user)
+    = link_to 'フォロー解除', ""
+  - else
+    = link_to "フォロー", ""
+
 %table.table.table-striped.table-bordered
   %thead
     %tr
