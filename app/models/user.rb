@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:twitter]
   has_many :articles
   has_many :stocks
+  has_many :relationships, foreign_key: :follower_id, dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
   validates :username, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
@@ -38,7 +38,15 @@ class User < ActiveRecord::Base
     stocks.find_by(article: article)
   end
 
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
+  end
+
   def following?(other_user)
-    false
+    relationships.find_by(followed_id: other_user.id)
   end
 end

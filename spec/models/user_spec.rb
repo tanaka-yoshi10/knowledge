@@ -22,4 +22,17 @@ RSpec.describe User, type: :model do
       expect(user.stocking?(article)).to be_falsey
     end
   end
+
+  describe "following" do
+    it "following?がtrueになること" do
+      user = create(:user)
+      other_user = create(:user)
+
+      user.follow!(other_user)
+      expect(user.following?(other_user)).to be_truthy
+
+      user.unfollow!(other_user)
+      expect(user.following?(other_user)).to be_falsey
+    end
+  end
 end
