@@ -4,7 +4,10 @@
   - if current_user.following?(@user)
     = link_to 'フォロー解除', ""
   - else
-    = link_to "フォロー", ""
+    = form_for(current_user.relationships.build(followed: @user)) do |f|
+      %div
+        = f.hidden_field :followed_id
+      = f.submit "フォロー", class: "btn btn-primary"
 
 %table.table.table-striped.table-bordered
   %thead
