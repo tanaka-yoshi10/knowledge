@@ -2,7 +2,8 @@
 
 - unless @user == current_user
   - if current_user.following?(@user)
-    = link_to 'フォロー解除', ""
+    = form_for(current_user.relationships.find_by(followed: @user), html: {method: :delete}) do |f|
+      = f.submit "フォロー解除", class: "btn"
   - else
     = form_for(current_user.relationships.build(followed: @user)) do |f|
       %div
