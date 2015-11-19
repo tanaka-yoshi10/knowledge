@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :stocks
   has_many :relationships, foreign_key: :follower_id, dependent: :destroy
+  has_many :reverse_relationships, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy
+  # TODO 上の文字列はシンボルにできないのか？
   has_many :followed_users, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_relationships, source: :follower
   validates :username, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)

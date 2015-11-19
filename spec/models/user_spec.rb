@@ -31,6 +31,9 @@ RSpec.describe User, type: :model do
       user.follow!(other_user)
       expect(user.following?(other_user)).to be_truthy
 
+      expect(user.followed_users).to include(other_user)
+      expect(other_user.followers).to include(user)
+
       user.unfollow!(other_user)
       expect(user.following?(other_user)).to be_falsey
     end
