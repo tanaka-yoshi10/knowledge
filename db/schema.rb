@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116141821) do
+ActiveRecord::Schema.define(version: 20151122014451) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",      null: false
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20151116141821) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "stocks", ["article_id", "user_id"], name: "index_stocks_on_article_id_and_user_id", unique: true
   add_index "stocks", ["article_id"], name: "index_stocks_on_article_id"
   add_index "stocks", ["user_id", "article_id"], name: "index_stocks_on_user_id_and_article_id", unique: true
   add_index "stocks", ["user_id"], name: "index_stocks_on_user_id"
