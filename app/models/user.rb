@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def stock!(article)
-    stocks.create!(article: article)
+    stocks.find_or_create_by!(article: article)
   end
 
   def unstock!(article)
