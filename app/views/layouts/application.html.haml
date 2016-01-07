@@ -8,16 +8,24 @@
     = csrf_meta_tags
   %body
     %header
-      %nav
-        = link_to 'Knowledge', root_path
-        - if user_signed_in?
-          = link_to 'プロフィール変更', edit_user_registration_path
-          = link_to '記事を作成', new_article_path
-          = link_to 'ログアウト', destroy_user_session_path, method: :delete
-          = current_user.username
-        - else
-          = link_to 'サインアップ', new_user_registration_path
-          = link_to 'ログイン', new_user_session_path
+      %nav.navbar.navbar-default
+        .container
+          .navbar-header
+            = link_to 'Knowledge', root_path, class: "navbar-brand"
+          %ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              %li= link_to '記事を作成', new_article_path
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  = current_user.username
+                  %span.caret
+                %ul.dropdown-menu
+                  %li= link_to 'プロフィール変更', edit_user_registration_path
+                  %li.divider
+                  %li= link_to 'ログアウト', destroy_user_session_path, method: :delete
+            - else
+              %li= link_to 'サインアップ', new_user_registration_path
+              %li= link_to 'ログイン', new_user_session_path
     .container
       %p.notice= notice
       %p.alert= alert
