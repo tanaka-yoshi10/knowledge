@@ -1,7 +1,7 @@
 #notice
   = notice
 
-%p
+.title-area
   %h1= @article.title
 
   - if @article.user == current_user
@@ -11,5 +11,5 @@
     = link_to 'ストック解除', [@article, current_user.stocks.where(article_id: @article).first], :method => :delete, :class => 'btn btn-primary'
   - else
     = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
-%p
+.content-area
   = markdown_to_html(@article.body)
