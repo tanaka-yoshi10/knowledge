@@ -4,10 +4,14 @@
 %p
   %strong Title:
   = @article.title
-- if current_user.stocking?(@article)
-  = link_to 'ストック解除', [@article, current_user.stocks.where(article_id: @article).first], :method => :delete, :class => 'btn btn-primary'
-- else
-  = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
+
+  - if @article.user == current_user
+    = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
+
+  - if current_user.stocking?(@article)
+    = link_to 'ストック解除', [@article, current_user.stocks.where(article_id: @article).first], :method => :delete, :class => 'btn btn-primary'
+  - else
+    = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
 %p
   %strong Body:
   = markdown_to_html(@article.body)
