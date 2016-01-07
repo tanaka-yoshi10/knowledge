@@ -2,8 +2,7 @@
   = notice
 
 %p
-  %strong Title:
-  = @article.title
+  %h1= @article.title
 
   - if @article.user == current_user
     = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
@@ -13,5 +12,4 @@
   - else
     = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
 %p
-  %strong Body:
   = markdown_to_html(@article.body)
