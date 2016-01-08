@@ -62,3 +62,4 @@ gem 'omniauth-twitter'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem "redcarpet"
+gem 'rb-readline'
