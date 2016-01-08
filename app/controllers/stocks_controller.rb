@@ -1,5 +1,6 @@
 class StocksController < ApplicationController
   before_action :set_article
+  before_action :authenticate_user!
 
   def create
     current_user.stock!(@article)
