@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :articles do
-    resources :stocks
+    resources :stocks, only: [:create, :destroy]
   end
 
   resources :users, only: :show
