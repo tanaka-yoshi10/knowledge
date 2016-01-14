@@ -6,7 +6,7 @@
     = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
 
   - if current_user.try!(:stocking?, @article)
-    = link_to 'ストック解除', [@article, current_user.stocks.where(article_id: @article).first], :method => :delete, :class => 'btn btn-primary'
+    = link_to 'ストック解除', [@article, current_user.stocks.find_by(article_id: @article)], :method => :delete, :class => 'btn btn-primary'
   - else
     = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
 .content-area
