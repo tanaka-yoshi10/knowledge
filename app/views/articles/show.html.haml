@@ -9,5 +9,8 @@
     = link_to 'ストック解除', [@article, current_user.stocks.find_by(article_id: @article)], :method => :delete, :class => 'btn btn-primary'
   - else
     = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
-.content-area
+.content-area.col-sm-9
   = markdown_to_html(@article.body)
+
+.side-area.col-sm-3
+  = @article.user.username
