@@ -24,7 +24,12 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to @article, notice: 'Article was successfully updated.'
     else
+      # TODO update失敗したらどうする？
     end
+  end
+
+  def destroy
+    # TODO not implemented
   end
 
   private
