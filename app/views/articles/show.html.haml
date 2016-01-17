@@ -1,6 +1,8 @@
 .title-area
   %h1= @article.title
   #{@article.stocks.count}ストック
+  .tag-area
+    = @article.tag_list
 
   - if @article.user == current_user
     = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'

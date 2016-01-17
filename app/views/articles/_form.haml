@@ -11,6 +11,10 @@
     = f.text_field :title, class: "form-control"
 
   .form-group
+    = f.label :tag_list
+    = text_field_tag 'article[tag_list]', @article.tag_list.join(','), "data-role" => "tagsinput"
+
+  .form-group
     = f.label :body
     = f.text_area :body, class: "form-control", size: "10x20"
 
