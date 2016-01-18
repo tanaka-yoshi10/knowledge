@@ -17,4 +17,4 @@
   = markdown_to_html(@article.body)
 
 .side-area.col-sm-3
-  = @article.user.username
+  = link_to @article.user.username, @article.user
