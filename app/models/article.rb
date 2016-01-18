@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   has_many :stocks
+  acts_as_ordered_taggable_on :tags
 
   # scopeにすべき？
   def self.stocked_by(user)
