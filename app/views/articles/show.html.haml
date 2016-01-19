@@ -14,7 +14,7 @@
       = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
 
 .content-area.col-sm-9
-  = markdown_to_html(@article.body)
+  ~ markdown_to_html(@article.body)
 
 .side-area.col-sm-3
   = link_to @article.user.username, @article.user
