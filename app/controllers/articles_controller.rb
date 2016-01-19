@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to @article, notice: 'Article was successfully updated.'
     else
-      # TODO update失敗したらどうする？
+      render :edit
     end
   end
 
