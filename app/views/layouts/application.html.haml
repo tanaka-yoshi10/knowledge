@@ -28,6 +28,6 @@
               %li= link_to 'サインアップ', new_user_registration_path
               %li= link_to 'ログイン', new_user_session_path
     .container
-      %p.notice= notice
-      %p.alert= alert
+      - flash.each do |type, msg|
+        %div{class: "alert alert-#{type}"}= msg
       = yield

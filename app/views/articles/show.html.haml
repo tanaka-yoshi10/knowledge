@@ -1,20 +1,24 @@
 .title-area
-  %h1= @article.title
-  #{@article.stocks.count}ストック
-  .tag-area
-    -@article.tag_list.each do |tag|
-      %span.label.label-default= tag
-  .article-contorl
-    - if @article.user == current_user
-      = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
+  .row
+    .col-sm-9
+      %h1.article-title= @article.title
+      .tag-area
+        -@article.tag_list.each do |tag|
+          %span.label.label-default= tag
+      .article-contorl
+        - if @article.user == current_user
+          = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
+    .col-sm-3
+      #{@article.stocks.count}ストック
+      .article-stock
+        - if current_user.try!(:stocking?, @article)
+          = link_to 'ストック解除', [@article, current_user.stocks.find_by(article_id: @article)], :method => :delete, :class => 'btn btn-primary'
+        - else
+          = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
 
-    - if current_user.try!(:stocking?, @article)
-      = link_to 'ストック解除', [@article, current_user.stocks.find_by(article_id: @article)], :method => :delete, :class => 'btn btn-primary'
-    - else
-      = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
+.row
+  .content-area.col-sm-9
+    ~ markdown_to_html(@article.body)
 
-.content-area.col-sm-9
-  ~ markdown_to_html(@article.body)
-
-.side-area.col-sm-3
-  = link_to @article.user.username, @article.user
+  .side-area.col-sm-3
+    = link_to @article.user.username, @article.user
