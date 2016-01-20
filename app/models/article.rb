@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   has_many :stocks
+  has_many :comments
   acts_as_ordered_taggable_on :tags
   validates :title, presence: true
   validates :body, presence: true

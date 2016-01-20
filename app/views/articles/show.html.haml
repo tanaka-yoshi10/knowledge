@@ -20,5 +20,25 @@
   .content-area.col-sm-9
     ~ markdown_to_html(@article.body)
 
+    %table
+      %thead
+        %tr
+          %th Body
+          %th Author
+          %th
+
+      %tbody
+        - @article.comments.each do |comment|
+          %tr
+            %td= comment.body
+            %td= link_to comment.user.username, comment.user
+            %td= link_to 'Destroy', [@article, comment], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    = form_for [@article, @article.comments.build] do |f|
+      .form-group
+        = f.text_area :body, class: "form-control"
+      .actions
+        = f.submit 'Save'
+
   .side-area.col-sm-3
     = link_to @article.user.username, @article.user
