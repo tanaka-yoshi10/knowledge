@@ -28,7 +28,7 @@
           %th
 
       %tbody
-        - @article.comments.each do |comment|
+        - @article.comments.includes(:user).each do |comment|
           %tr
             %td= comment.body
             %td= link_to comment.user.username, comment.user
