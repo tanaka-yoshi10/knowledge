@@ -1,0 +1,13 @@
+%h1 タグ一覧
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th Count
+
+  %tbody
+    - @tags.each do |tag|
+      %tr
+        %td= tag.name
+        %td= tag.taggings_count

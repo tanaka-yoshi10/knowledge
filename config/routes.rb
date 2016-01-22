@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   resources :users, only: :show
   resources :relationships, only: [:create, :destroy]
+  resources :tags, only: [:show, :index]
 end
