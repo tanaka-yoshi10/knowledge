@@ -9,5 +9,5 @@
   %tbody
     - @tags.each do |tag|
       %tr
-        %td= tag.name
+        %td= link_to tag.name, tag_url(tag.name)
         %td= tag.taggings_count
