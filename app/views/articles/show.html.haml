@@ -4,7 +4,7 @@
       %h1.article-title= @article.title
       .tag-area
         -@article.tag_list.each do |tag|
-          %span.label.label-default= tag
+          %span.label.label-info= link_to tag, tag_url(tag)
       .article-contorl
         - if @article.user == current_user
           = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
