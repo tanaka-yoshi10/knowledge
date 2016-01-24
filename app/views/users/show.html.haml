@@ -2,13 +2,9 @@
 
 - unless @user == current_user
   - if current_user.following?(@user)
-    = form_for(current_user.relationships.find_by(followed: @user), html: {method: :delete}) do |f|
-      = f.submit "フォロー解除", class: "btn"
+    = link_to "解除", user_relationship_path(@user), :method => :delete, :class => 'btn btn-default'
   - else
-    = form_for(current_user.relationships.build(followed: @user)) do |f|
-      %div
-        = f.hidden_field :followed_id
-      = f.submit "フォロー", class: "btn btn-primary"
+    = link_to "フォロー", user_relationship_path(@user), :method => :post, :class => 'btn btn-primary'
 
 %table.table.table-striped.table-bordered
   %thead

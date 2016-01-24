@@ -7,8 +7,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :users, only: :show
-  resources :relationships, only: [:create, :destroy]
+  resources :users, only: :show do
+    resource :relationship, only: [:create, :destroy], path: 'follow'
+  end
+
   resources :tags, only: [:show, :index], param: :name do
     resource :tagfollow, only: [:create, :destroy], path: 'follow'
   end
