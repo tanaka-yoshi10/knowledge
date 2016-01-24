@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   has_many :tagfollows, dependent: :destroy
   has_many :tags, through: :tagfollows
+  has_many :stocking_articles, through: :stocks, source: :article
 
   def self.from_omniauth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|

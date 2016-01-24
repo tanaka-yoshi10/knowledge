@@ -3,6 +3,6 @@ class PagesController < ApplicationController
 
   def index
     @articles = Article.all.includes(:user) # TODO: 公開のみにする
-    @stocked_articles = Article.stocked_by(current_user).includes(:user)
+    @stocking_articles = current_user.stocking_articles.includes(:user)
   end
 end
