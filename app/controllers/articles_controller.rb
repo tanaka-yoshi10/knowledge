@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
   def new
     @article = current_user.articles.build
   end
@@ -29,7 +29,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    # TODO not implemented
+    @article.destroy! # TODO !をつける？つけない？
+    # TODO 関連するデータを削除 tag stock
+    redirect_to current_user, notice: 'Article was successfully destroyed.'
   end
 
   private

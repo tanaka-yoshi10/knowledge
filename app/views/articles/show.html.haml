@@ -8,6 +8,7 @@
       .article-contorl
         - if @article.user == current_user
           = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
+          = link_to '削除', @article, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
     .col-sm-3
       #{@article.stocks.count}ストック
       .article-stock
