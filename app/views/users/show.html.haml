@@ -1,7 +1,7 @@
 %h1= @user.username
 
 - unless @user == current_user
-  - if current_user.following?(@user)
+  - if current_user.try!(:following?, @user)
     = link_to "解除", user_relationship_path(@user), :method => :delete, :class => 'btn btn-default'
   - else
     = link_to "フォロー", user_relationship_path(@user), :method => :post, :class => 'btn btn-primary'
