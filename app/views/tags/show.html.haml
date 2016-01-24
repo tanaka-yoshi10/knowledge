@@ -1,4 +1,10 @@
-%h1 記事一覧
+%h1= @tag.name
+
+.tag-stock
+  - if current_user.try!(:following_tag?, @tag)
+    = link_to "解除", tag_tagfollow_path(@tag.name), :method => :delete, :class => 'btn btn-default'
+  - else
+    = link_to "フォロー", tag_tagfollow_path(@tag.name), :method => :post, :class => 'btn btn-primary'
 
 %table.table.table-striped.table-bordered
   %thead

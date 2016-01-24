@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
   validates :username, presence: true, uniqueness: true
+  acts_as_ordered_taggable_on :tags
 
   def self.from_omniauth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
@@ -51,5 +52,19 @@ class User < ActiveRecord::Base
 
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
+  end
+
+  def follow_tag!(tag)
+    tag_list.add(tag.name)
+    save!
+  end
+
+  def unfollow_tag!(tag)
+    tag_list.remove(tag.name)
+    save!
+  end
+
+  def following_tag?(tag)
+    tag_list.include?(tag.name)
   end
 end

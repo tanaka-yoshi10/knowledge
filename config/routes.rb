@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :show
   resources :relationships, only: [:create, :destroy]
-  resources :tags, only: [:show, :index]
+  resources :tags, only: [:show, :index], param: :name do
+    resource :tagfollow, only: [:create, :destroy], path: 'follow'
+  end
 end
