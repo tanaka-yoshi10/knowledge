@@ -32,7 +32,7 @@
       %tbody
         - @article.comments.includes(:user).each do |comment|
           %tr
-            %td= comment.body
+            %td~ markdown_to_html(comment.body)
             %td= link_to comment.user.username, comment.user
             %td= link_to 'Destroy', [@article, comment], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
