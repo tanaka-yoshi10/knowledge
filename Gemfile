@@ -29,6 +29,7 @@ group :development do
   gem 'bullet'
   gem 'rubocop', require: false
   gem 'erb2haml'
+  gem 'quiet_assets'
 end
 
 group :development, :test do
