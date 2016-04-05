@@ -1,4 +1,4 @@
-%h1= @user.username
+%h1= @user.name
 
 - unless @user == current_user
   - if current_user.try!(:following?, @user)
@@ -16,4 +16,4 @@
     - @user.articles.each do |article|
       %tr
         %td= link_to article.title, article
-        %td= link_to article.user.username, article.user
+        %td= link_to article.user.name, article.user

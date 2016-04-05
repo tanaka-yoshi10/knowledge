@@ -34,7 +34,7 @@
         - @article.comments.includes(:user).each do |comment|
           %tr
             %td~ markdown_to_html(comment.body)
-            %td= link_to comment.user.username, comment.user
+            %td= link_to comment.user.name, comment.user
             %td= link_to 'Destroy', [@article, comment], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
     = form_for [@article, @article.comments.build] do |f|
@@ -44,4 +44,4 @@
         = f.submit 'Save'
 
   .side-area.col-sm-3
-    = link_to @article.user.username, @article.user
+    = link_to @article.user.name, @article.user

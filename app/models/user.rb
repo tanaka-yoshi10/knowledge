@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # TODO 上の文字列はシンボルにできないのか？
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
-  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   has_many :tagfollows, dependent: :destroy
   has_many :tags, through: :tagfollows
   has_many :stocking_articles, through: :stocks, source: :article
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.username = auth["info"]["nickname"]
+      user.name = auth["info"]["nickname"]
     end
   end
 
