@@ -12,4 +12,9 @@ feature 'Tags' do
     visit tag_path("iOS")
     expect(page).to have_content 'MyString'
   end
+
+  scenario 'invalid tag' do
+    visit '/tags/aab'
+    expect(page.status_code).to eq 404
+  end
 end
