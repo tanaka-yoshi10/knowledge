@@ -6,7 +6,7 @@
         -@article.tag_list.each do |tag|
           %span.label.label-info= link_to tag, tag_url(tag)
       .article-contorl
-        - if @article.user == current_user
+        - if @article.author == current_user
           = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
           = link_to '削除', @article, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
     .col-sm-3
@@ -44,4 +44,4 @@
         = f.submit 'Save'
 
   .side-area.col-sm-3
-    = link_to @article.user.name, @article.user
+    = link_to @article.author.name, @article.author

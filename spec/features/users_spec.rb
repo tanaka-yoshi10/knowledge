@@ -11,4 +11,12 @@ feature 'User management' do
       click_button "Sign up"
     end.to change(User, :count).by(1)
   end
+
+  scenario 'show user' do
+    user = create(:user)
+    article = create(:article, author: user)
+
+    visit user_path(user)
+    expect(page).to have_content 'MyString'
+  end
 end

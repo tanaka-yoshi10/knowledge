@@ -16,7 +16,7 @@
     - @articles.each do |article|
       %tr
         %td= link_to article.title, article
-        %td= link_to article.user.name, article.user
+        %td= link_to article.author.name, article.author
 
 - @tag.users.each do |user|
   = user.name

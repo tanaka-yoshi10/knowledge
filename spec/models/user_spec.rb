@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     it "stocking?がtrueになること" do
       user = create(:user)
       other_user = create(:user)
-      article = create(:article, user_id: other_user.id)
+      article = create(:article, author: other_user)
 
       user.stock!(article)
       expect(user.stocking?(article)).to be_truthy
@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
     it "stocking?がfalseになること" do
       user = create(:user)
       other_user = create(:user)
-      article = create(:article, user_id: other_user.id)
+      article = create(:article, author: other_user)
       user.stock!(article)
 
       user.unstock!(article)
