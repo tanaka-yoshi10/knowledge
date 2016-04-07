@@ -2,8 +2,7 @@ require 'rails_helper'
 
 feature 'Tags' do
   scenario 'show tag' do
-    user = create(:user)
-    article = create(:article, author: user)
+    article = create(:article)
 
     visit edit_article_path(article)
     fill_in 'Tag list', with: "iOS"
