@@ -11,15 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405223123) do
+ActiveRecord::Schema.define(version: 20160411222616) do
 
   create_table "articles", force: :cascade do |t|
-    t.string   "title",      null: false
-    t.text     "body",       null: false
-    t.integer  "author_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title",                            null: false
+    t.text     "body",                             null: false
+    t.integer  "author_id",                        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "status",     limit: 1, default: 0, null: false
   end
+
+  add_index "articles", ["status"], name: "index_articles_on_status"
 
   create_table "comments", force: :cascade do |t|
     t.text     "body",       null: false

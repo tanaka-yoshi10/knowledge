@@ -5,4 +5,5 @@ class Article < ActiveRecord::Base
   acts_as_ordered_taggable_on :tags
   validates :title, presence: true
   validates :body, presence: true
+  enum status: { draft: 0, published: 1 }
 end
