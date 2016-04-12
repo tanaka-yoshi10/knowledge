@@ -3,6 +3,6 @@ class PagesController < ApplicationController
 
   def index
     @articles = Article.published.includes(:author)
-    @stocking_articles = current_user.stocking_articles.includes(:author)
+    @stocking_articles = current_user.stocking_articles.published.includes(:author)
   end
 end
