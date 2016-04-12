@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :articles do
+    collection do
+      get :drafts
+    end
     resources :stocks, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end

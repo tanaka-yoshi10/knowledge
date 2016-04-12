@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :check_draft, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
   def new
     @article = current_user.articles.build
   end
@@ -33,6 +34,10 @@ class ArticlesController < ApplicationController
     @article.destroy! # TODO !をつける？つけない？
     # TODO 関連するデータを削除 tag stock
     redirect_to current_user, notice: 'Article was successfully destroyed.'
+  end
+
+  def drafts
+    @articles = current_user.articles.draft
   end
 
   private
