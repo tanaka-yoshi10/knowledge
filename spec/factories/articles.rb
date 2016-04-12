@@ -3,5 +3,6 @@ FactoryGirl.define do
     association :author, factory: :user
     title "MyString"
     body "MyText"
+    status :published
   end
 end
