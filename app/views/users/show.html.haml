@@ -13,7 +13,7 @@
       %th Author
 
   %tbody
-    - @user.articles.each do |article|
+    - @user.articles.published.each do |article|
       %tr
         %td= link_to article.title, article
         %td= link_to article.author.name, article.author

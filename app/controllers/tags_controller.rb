@@ -5,6 +5,6 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find_by!(name: params[:name])
-    @articles = Article.tagged_with(params[:name]).includes(:author)
+    @articles = Article.tagged_with(params[:name]).published.includes(:author)
   end
 end
