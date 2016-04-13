@@ -13,7 +13,7 @@
       %th Author
 
   %tbody
-    - @articles.each do |article|
+    - Article.tagged_with(@tag.name).published.includes(:author).each do |article|
       %tr
         %td= link_to article.title, article
         %td= link_to article.author.name, article.author

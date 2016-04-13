@@ -1,13 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :set_article_and_comment, only: [:destroy]
+  before_action :set_article
   before_action :authenticate_user!
 
   def create
-    @article = Article.find(params[:article_id]) # TODO dryにしたい
-    @comment = @article.comments.build(comment_params)
-    @comment.user = current_user
+    comment = @article.comments.build(comment_params)
+    comment.user = current_user
 
-    if @comment.save
+    if comment.save
       redirect_to @article, notice: 'Comment was successfully created.'
     else
       # TODO comment投稿NGの場合の処理
@@ -16,14 +15,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
     redirect_to @article, notice: 'Comment was successfully destroyed.'
   end
 
   private
-    def set_article_and_comment
+    def set_article
       @article = Article.find(params[:article_id])
-      @comment = Comment.find(params[:id])
     end
 
     def comment_params
