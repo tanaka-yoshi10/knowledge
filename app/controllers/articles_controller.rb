@@ -1,7 +1,9 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :check_draft, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
+  before_action :check_draft, only: [:show, :edit, :update, :destroy]
+  before_action :check_author, only: [:edit, :update, :destroy]
+
   def new
     @article = current_user.articles.build
   end
@@ -48,6 +50,12 @@ class ArticlesController < ApplicationController
   def check_draft
     if @article.draft? && @article.author != current_user
       redirect_to root_path, notice: 'この記事は下書きです'
+    end
+  end
+
+  def check_author
+    if @article.author != current_user
+      redirect_to root_path, notice: 'この記事を編集できるのは著者のみです'
     end
   end
 
