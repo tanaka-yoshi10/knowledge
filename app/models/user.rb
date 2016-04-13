@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def stocking?(article)
-    stocks.find_by(article: article)
+    stocks.find_by(article: article).present?
   end
 
   def follow!(other_user)
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    relationships.find_by(followed_id: other_user.id)
+    relationships.find_by(followed_id: other_user.id).present?
   end
 
   def follow_tag!(tag)
@@ -65,6 +65,6 @@ class User < ActiveRecord::Base
   end
 
   def following_tag?(tag)
-    tagfollows.find_by(tag: tag)
+    tagfollows.find_by(tag: tag).present?
   end
 end
