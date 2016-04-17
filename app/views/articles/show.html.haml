@@ -31,11 +31,7 @@
           %th
 
       %tbody
-        - @article.comments.includes(:user).each do |comment|
-          %tr
-            %td~ markdown_to_html(comment.body)
-            %td= link_to comment.user.name, comment.user
-            %td= link_to 'Destroy', [@article, comment], :method => :delete, :data => { :confirm => 'Are you sure?' }
+        = render @article.comments.includes(:user)
 
     = form_for [@article, @article.comments.build] do |f|
       .form-group
