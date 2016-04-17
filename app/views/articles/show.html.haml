@@ -30,12 +30,12 @@
           %th Author
           %th
 
-      %tbody
+      %tbody#comments
         = render @article.comments.includes(:user)
 
-    = form_for [@article, @article.comments.build] do |f|
+    = form_for [@article, @article.comments.build], remote: true do |f|
       .form-group
-        = f.text_area :body, class: "form-control"
+        = f.text_area :body, class: "form-control", id: "comment_field"
       .actions
         = f.submit 'Save'
 

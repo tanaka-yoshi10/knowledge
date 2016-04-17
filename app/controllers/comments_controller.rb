@@ -3,14 +3,12 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    comment = @article.comments.build(comment_params)
-    comment.user = current_user
+    @comment = @article.comments.build(comment_params)
+    @comment.user = current_user
 
-    if comment.save
-      redirect_to @article, notice: 'Comment was successfully created.'
+    if @comment.save
     else
-      # TODO comment投稿NGの場合の処理
-      redirect_to @article, alert: 'Comment was failed'
+      render :error
     end
   end
 
