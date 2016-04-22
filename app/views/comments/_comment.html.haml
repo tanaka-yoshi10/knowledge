@@ -1,4 +1,16 @@
-%tr
-  %td~ markdown_to_html(comment.body)
-  %td= link_to comment.user.name, comment.user
-  %td= link_to 'Destroy', [comment.article, comment], :method => :delete, :data => { :confirm => 'Are you sure?' }
+.comment
+  .comment-header
+    .comment-header-creator
+      %div
+        = link_to comment.user.name, comment.user
+      %div
+        0 contribution
+    .comment-header-metadata
+      %div
+        = l comment.created_at
+      %div
+        - if comment.user == current_user
+          = link_to '削除', [comment.article, comment], :method => :delete, :data => { :confirm => 'このコメントを削除していいですか?' }
+  .comment-content
+    .markdown-content
+      ~ markdown_to_html(comment.body)

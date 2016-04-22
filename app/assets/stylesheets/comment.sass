@@ -1,0 +1,32 @@
+.comment-header
+  display: flex
+  justify-content: space-between
+
+.comment-header-metadata
+  text-align: right
+
+.comment-content
+  margin-top: 11px
+  margin-bottom: 20px
+
+.markdown-content
+  background-color: lightgrey
+  padding: 18px 24px
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    border-style: solid
+    border-width: 10px 12px
+    border-color: transparent
+    border-bottom-color: lightgrey
+    left: 10px
+    top: -20px
+  p
+    font-size: 16px
+    line-height: 1.6
+    margin-bottom: .9em
+
+.comment-form-header
+  margin-bottom: 10px
+  font-weight: 900

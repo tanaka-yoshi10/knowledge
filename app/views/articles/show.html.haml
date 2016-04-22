@@ -23,21 +23,19 @@
 
     %hr
 
-    %table
-      %thead
-        %tr
-          %th Body
-          %th Author
-          %th
+    #comments
+      = render @article.comments.includes(:user)
 
-      %tbody#comments
-        = render @article.comments.includes(:user)
-
-    = form_for [@article, @article.comments.build], remote: true do |f|
-      .form-group
-        = f.text_area :body, class: "form-control", id: "comment_field"
-      .actions
-        = f.submit 'Save'
+    - if user_signed_in?
+      #newcomment
+        = form_for [@article, @article.comments.build], remote: true do |f|
+          .comment-form-header
+            コメントを投稿する
+          .comment-form-content
+            .form-group
+              = f.text_area :body, class: "form-control", id: "comment_field", placeholder: "コメントを入力してください"
+            .actions
+              = f.submit 'Save'
 
   .side-area.col-sm-3
     = link_to @article.author.name, @article.author
