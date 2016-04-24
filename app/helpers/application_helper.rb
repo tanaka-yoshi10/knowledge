@@ -11,4 +11,13 @@ module ApplicationHelper
 
     markdown.render(text).html_safe unless text.blank?
   end
+
+  def avatar_url(user, size)
+    gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+  end
+
+  def avatar_image_tag(user, size)
+    link_to image_tag(avatar_url(@article.author, size)), @article.author
+  end
 end

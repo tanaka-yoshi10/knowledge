@@ -1,41 +1,55 @@
-.title-area
-  .row
-    .col-sm-9
-      %h1.article-title= @article.title
-      .tag-area
-        -@article.tag_list.each do |tag|
-          %span.label.label-info= link_to tag, tag_url(tag)
-      .article-contorl
-        - if @article.author == current_user
-          = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
-          = link_to '削除', @article, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
-    .col-sm-3
-      #{@article.stocks.count}ストック
-      .article-stock
-        - if current_user.try!(:stocking?, @article)
-          = link_to 'ストック解除', [@article, current_user.stocks.find_by(article_id: @article)], :method => :delete, :class => 'btn btn-primary'
-        - else
-          = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
+- content_for :title do
+  .title-area
+    .container
+      .row
+        .col-sm-9
+          %h1.article-title= @article.title
+          .tag-area
+            -@article.tag_list.each do |tag|
+              %span.label.label-info= link_to tag, tag_url(tag)
+          .article-contorl
+            = avatar_image_tag(@article.author, 25)
+            #{link_to @article.author.name, @article.author}が#{l @article.created_at}に投稿
+            - if @article.author == current_user
+              = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
+              = link_to '削除', @article, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
+        .col-sm-3
+          %ul.list-unstyled.article-header-stock-status-list
+            %li #{@article.stocks.count} ストック
+            %li #{@article.comments.count} コメント
+          .article-stock
+            - if current_user.try!(:stocking?, @article)
+              = link_to 'ストック解除', [@article, current_user.stocks.find_by(article_id: @article)], :method => :delete, :class => 'btn btn-primary'
+            - else
+              = link_to "ストック", article_stocks_url(@article), :method => :post, :class => 'btn btn-primary'
 
 .row
-  .content-area.col-sm-9
-    ~ markdown_to_html(@article.body)
+  .container
+    .content-area.col-sm-9
+      ~ markdown_to_html(@article.body)
 
-    %hr
+      %hr
 
-    #comments
-      = render @article.comments.includes(:user)
+      #comments
+        = render @article.comments.includes(:user)
 
-    - if user_signed_in?
-      #newcomment
-        = form_for [@article, @article.comments.build], remote: true do |f|
-          .comment-form-header
-            コメントを投稿する
-          .comment-form-content
-            .form-group
-              = f.text_area :body, class: "form-control", id: "comment_field", placeholder: "コメントを入力してください"
-            .actions
-              = f.submit 'Save'
+      - if user_signed_in?
+        #newcomment
+          = form_for [@article, @article.comments.build], remote: true do |f|
+            .comment-form-header
+              コメントを投稿する
+            .comment-form-content
+              .form-group
+                = f.text_area :body, class: "form-control", id: "comment_field", placeholder: "コメントを入力してください"
+              .actions
+                = f.submit 'Save'
 
-  .side-area.col-sm-3
-    = link_to @article.author.name, @article.author
+    .side-area.col-sm-3
+      .article-author
+        = avatar_image_tag(@article.author, 60)
+        .article-author-info
+          = link_to @article.author.name, @article.author
+          %div
+            0 contribution
+          %div
+            follow

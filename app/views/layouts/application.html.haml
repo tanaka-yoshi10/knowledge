@@ -9,7 +9,7 @@
     = csrf_meta_tags
   %body
     %header
-      %nav.navbar.navbar-default
+      %nav.navbar.navbar-default.shared-header
         .container
           .navbar-header
             = link_to 'Knowledge', root_path, class: "navbar-brand"
@@ -28,6 +28,10 @@
             - else
               %li= link_to 'サインアップ', new_user_registration_path
               %li= link_to 'ログイン', new_user_session_path
+
+    / 記事のタイトル部は横いっぱいに背景色を描画したいため
+    = yield :title
+
     .container
       - flash.each do |type, msg|
         %div{class: "alert alert-#{type}"}= msg
