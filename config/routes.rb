@@ -4,13 +4,16 @@ Rails.application.routes.draw do
 
   resources :articles do
     collection do
-      get :drafts
+      get :drafts # TODO: /:user/drafs もしくは /draftsとするべきかも
     end
     resources :stocks, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
 
   resources :users, only: :show do
+    member do
+      get :stocks # TODO: /stockのほうが良いかも
+    end
     resource :relationship, only: [:create, :destroy], path: 'follow'
   end
 
