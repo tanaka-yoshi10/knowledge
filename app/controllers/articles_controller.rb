@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
   end
 
   def drafts
-    @articles = current_user.articles.draft
+    @articles = current_user.articles.draft.page(params[:page])
   end
 
   private
