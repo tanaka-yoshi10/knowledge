@@ -6,12 +6,10 @@ class UsersController < ApplicationController
 
   def stocks
     @articles = @user.stocking_articles.published.includes(:author).page(params[:page])
-    render 'articles/index' # TODO: 共通のlayoutを使うべきかも
   end
 
   def articles
     @articles = @user.articles.published.includes(:author).page(params[:page])
-    render 'articles/index' # TODO: 共通のlayoutを使うべきかも
   end
 
   private
