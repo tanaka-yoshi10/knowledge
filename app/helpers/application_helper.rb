@@ -18,6 +18,6 @@ module ApplicationHelper
   end
 
   def avatar_image_tag(user, size)
-    link_to image_tag(avatar_url(@article.author, size)), @article.author
+    link_to image_tag(avatar_url(user, size)), user
   end
 end

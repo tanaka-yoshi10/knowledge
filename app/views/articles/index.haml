@@ -1,0 +1,16 @@
+= render partial: 'pages/stream_tabs'
+
+.activities
+  - @articles.each do |article|
+    .item-box
+      .item-box-avatar
+        = avatar_image_tag(article.author, 40)
+      %div
+        .item-box-header
+          #{link_to article.author.name, article.author}が#{l article.created_at}に投稿しました
+        .item-box-title
+          %strong= link_to article.title, article
+          - article.tag_list.each do |tag|
+            %span.label.label-info= link_to tag, tag_url(tag)
+
+= paginate @articles

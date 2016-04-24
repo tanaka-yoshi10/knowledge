@@ -66,3 +66,4 @@ gem "redcarpet"
 gem 'rb-readline'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'bootstrap-tagsinput-rails'
+gem 'kaminari'

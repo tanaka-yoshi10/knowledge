@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Pages' do
-  scenario 'show top page' do
+  scenario 'show article page' do
     user = create(:user)
     article = create(:article, author: user, status: :published)
 
@@ -10,7 +10,7 @@ feature 'Pages' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    visit root_path
+    visit articles_path
     expect(page).to have_content 'MyString'
   end
 
@@ -23,7 +23,7 @@ feature 'Pages' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    visit root_path
+    visit articles_path
     expect(page).not_to have_content 'MyString'
   end
 end

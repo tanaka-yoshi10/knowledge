@@ -4,6 +4,10 @@ class ArticlesController < ApplicationController
   before_action :check_draft, only: [:show, :edit, :update, :destroy]
   before_action :check_author, only: [:edit, :update, :destroy]
 
+  def index
+    @articles = Article.published.includes(:author).page(params[:page])
+  end
+
   def new
     @article = current_user.articles.build
   end
