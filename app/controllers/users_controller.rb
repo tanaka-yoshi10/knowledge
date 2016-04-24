@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     render 'articles/index' # TODO: 共通のlayoutを使うべきかも
   end
 
+  def articles
+    @articles = @user.articles.published.includes(:author).page(params[:page])
+    render 'articles/index' # TODO: 共通のlayoutを使うべきかも
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
