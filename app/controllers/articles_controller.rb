@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   before_action :check_author, only: [:edit, :update, :destroy]
 
   def index
-    @articles = Article.published.includes(:author).page(params[:page])
+    @articles = Article.published.order(:created_at).reverse_order.includes(:author).page(params[:page])
   end
 
   def new
@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
   end
 
   def drafts
-    @articles = current_user.articles.draft.page(params[:page])
+    @articles = current_user.articles.draft.order(:created_at).reverse_order.includes(:author).page(params[:page])
   end
 
   private
