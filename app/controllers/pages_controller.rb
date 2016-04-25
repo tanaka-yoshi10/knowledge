@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @articles = Article.published.includes(:author)
+  end
+
+  def drafts
+    @articles = current_user.articles.draft.order(:created_at).reverse_order.includes(:author).page(params[:page])
   end
 end

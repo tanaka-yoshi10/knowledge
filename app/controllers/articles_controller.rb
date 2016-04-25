@@ -42,10 +42,6 @@ class ArticlesController < ApplicationController
     redirect_to current_user, notice: 'Article was successfully destroyed.'
   end
 
-  def drafts
-    @articles = current_user.articles.draft.order(:created_at).reverse_order.includes(:author).page(params[:page])
-  end
-
   private
   def set_article
     @article = Article.find(params[:id])

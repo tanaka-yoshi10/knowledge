@@ -16,7 +16,7 @@
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li= link_to '記事を作成', new_article_path
-              %li= link_to '下書き', drafts_articles_path
+              %li= link_to '下書き', drafts_path
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                   = current_user.name
