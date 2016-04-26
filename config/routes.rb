@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'drafts', to: 'pages#drafts'
 
   resources :articles do
-    resources :stocks, only: [:create, :destroy]
+    resource :stock, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
 
