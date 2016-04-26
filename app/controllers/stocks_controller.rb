@@ -4,12 +4,12 @@ class StocksController < ApplicationController
 
   def create
     current_user.stock!(@article)
-    redirect_to @article
+    # TODO: エラー時の考慮
   end
 
   def destroy
     current_user.unstock!(@article)
-    redirect_to @article
+    # TODO: エラー時の考慮
   end
 
   private
