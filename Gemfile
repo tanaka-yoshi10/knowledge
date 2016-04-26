@@ -11,18 +11,11 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-group :development, :test do
-  gem 'byebug'
-end
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'web-console'
   gem 'spring'
-end
-
-gem 'jquery-turbolinks'
-
-group :development do
   gem 'guard-livereload', require: false
   gem 'rails-erd'
   gem 'spring-commands-rspec'
@@ -33,6 +26,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
@@ -49,13 +43,17 @@ group :development, :test do
   gem "shoulda-matchers"
   gem "factory_girl_rails"
   gem "capybara"
-  gem "capybara-webkit"
   gem 'launchy'
   gem "database_cleaner"
   gem "test-queue"
   gem 'faker'
   gem 'faker-japanese'
 end
+
+group :test do
+  gem "capybara-webkit"
+end
+
 
 gem 'devise'
 gem 'omniauth-twitter'
