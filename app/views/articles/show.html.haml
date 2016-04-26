@@ -50,6 +50,6 @@
         .article-author-info
           = link_to @article.author.name, @article.author
           %div
-            0 contribution
+            #{@article.author.contribution} contribution
           %div
             follow

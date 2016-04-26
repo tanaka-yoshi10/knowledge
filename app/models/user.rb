@@ -67,4 +67,8 @@ class User < ActiveRecord::Base
   def following_tag?(tag)
     tagfollows.find_by(tag: tag).present?
   end
+
+  def contribution
+    self.articles.joins(:stocks).count
+  end
 end
