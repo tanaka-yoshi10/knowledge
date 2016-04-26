@@ -5,11 +5,13 @@ class TagfollowsController < ApplicationController
   def create
     current_user.follow_tag!(@tag)
     redirect_to tag_path(@tag.name)
+    # TODO: Ajax化したい
   end
 
   def destroy
     current_user.unfollow_tag!(@tag)
     redirect_to tag_path(@tag.name)
+    # TODO: Ajax化したい
   end
 
   private

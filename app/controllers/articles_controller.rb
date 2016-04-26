@@ -38,8 +38,8 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy! # TODO !をつける？つけない？
-    # TODO 関連するデータを削除 tag stock
     redirect_to current_user, notice: 'Article was successfully destroyed.'
+    # TODO: redirect先を再考
   end
 
   private

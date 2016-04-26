@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   # TODO 上の文字列はシンボルにできないのか？
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
-  validates :name, presence: true, uniqueness: true
   has_many :tagfollows, dependent: :destroy
   has_many :tags, through: :tagfollows
   has_many :stocking_articles, through: :stocks, source: :article
+  validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|

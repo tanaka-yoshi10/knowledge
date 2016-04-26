@@ -4,10 +4,12 @@ class RelationshipsController < ApplicationController
 
   def create
     current_user.follow!(@user)
+    # TODO: エラー時の考慮
   end
 
   def destroy
     current_user.unfollow!(@user)
+    # TODO: エラー時の考慮
   end
 
   private

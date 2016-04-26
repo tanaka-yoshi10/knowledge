@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # TODO: feed機能
   end
 
   def drafts
