@@ -1,10 +1,7 @@
 %h1= @user.name
 
-- unless @user == current_user
-  - if current_user.try!(:following?, @user)
-    = link_to "解除", user_relationship_path(@user), :method => :delete, :class => 'btn btn-default'
-  - else
-    = link_to "フォロー", user_relationship_path(@user), :method => :post, :class => 'btn btn-primary'
+.user-follow-form
+  = render partial: 'follow_form', locals: {user: @user}
 
 %table.table.table-striped.table-bordered
   %thead
@@ -13,7 +10,7 @@
       %th Author
 
   %tbody
-    - @user.articles.published.each do |article|
+    - @user.articles.published.includes(:author).each do |article|
       %tr
         %td= link_to article.title, article
         %td= link_to article.author.name, article.author
