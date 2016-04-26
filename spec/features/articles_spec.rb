@@ -17,7 +17,7 @@ feature 'Articles' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    visit drafts_articles_path
+    visit drafts_path
     expect(page).to have_content 'Draft'
   end
 end
