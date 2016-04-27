@@ -303,6 +303,9 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (3.0.0)
       activesupport (>= 4.0.0)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     slop (3.6.0)
     spring (1.4.0)
     spring-commands-rspec (1.0.4)
@@ -384,6 +387,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 0.4.0)
   shoulda-matchers
+  simple_form
   spring
   spring-commands-rspec
   sqlite3
