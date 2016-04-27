@@ -1,0 +1,28 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @profile.user
+%p
+  %b First name:
+  = @profile.first_name
+%p
+  %b Last name:
+  = @profile.last_name
+%p
+  %b Blog url:
+  = @profile.blog_url
+%p
+  %b Organization:
+  = @profile.organization
+%p
+  %b Introducion:
+  = @profile.introducion
+%p
+  %b Qiita:
+  = @profile.qiita_id
+
+/ TODO: 自分以外は編集不可にする
+= link_to 'Edit', edit_user_profile_path(@profile.user)
+\|
+= link_to 'Back', @profile.user

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :tagfollows, dependent: :destroy
   has_many :tags, through: :tagfollows
   has_many :stocking_articles, through: :stocks, source: :article
+  has_one :profile, dependent: :destroy
   validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)

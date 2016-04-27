@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get :articles
     end
     resource :relationship, only: [:create, :destroy], path: 'follow'
+    resource :profile, except: [:destroy]
   end
 
   resources :tags, only: [:show, :index], param: :name do
