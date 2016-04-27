@@ -5,25 +5,22 @@ gem 'sqlite3'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
-
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 gem 'jquery-turbolinks'
-
-group :development do
-  gem 'web-console'
-  gem 'spring'
-  gem 'guard-livereload', require: false
-  gem 'rails-erd'
-  gem 'spring-commands-rspec'
-  gem 'bullet'
-  gem 'rubocop', require: false
-  gem 'erb2haml'
-  gem 'quiet_assets'
-end
+gem 'devise'
+gem 'omniauth-twitter'
+gem 'haml-rails'
+gem 'bootstrap-sass'
+gem "redcarpet"
+gem 'rb-readline'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'bootstrap-tagsinput-rails'
+gem 'kaminari'
+gem 'simple_form'
+gem 'ransack'
 
 group :development, :test do
   gem 'byebug'
@@ -50,19 +47,20 @@ group :development, :test do
   gem 'faker-japanese'
 end
 
+group :development do
+  gem 'web-console'
+  gem 'spring'
+  gem 'guard-livereload', require: false
+  gem 'rails-erd'
+  gem 'spring-commands-rspec'
+  gem 'bullet'
+  gem 'rubocop', require: false
+  gem 'erb2haml'
+  gem 'quiet_assets'
+end
+
+
 group :test do
   gem "capybara-webkit"
 end
 
-
-gem 'devise'
-gem 'omniauth-twitter'
-gem 'haml-rails'
-gem 'bootstrap-sass'
-gem "redcarpet"
-gem 'rb-readline'
-gem 'acts-as-taggable-on', '~> 3.4'
-gem 'bootstrap-tagsinput-rails'
-gem 'kaminari'
-gem 'simple_form'
-gem 'ransack'
