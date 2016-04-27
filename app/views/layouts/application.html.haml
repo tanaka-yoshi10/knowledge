@@ -13,6 +13,12 @@
         .container
           .navbar-header
             = link_to 'Knowledge', root_path, class: "navbar-brand"
+
+          %ul.nav.navbar-nav.navbar-left
+            %li
+              = search_form_for (@q || @q = Article.ransack(params[:q])), class: 'navbar-form' do |f|
+                = f.search_field :title_or_body_cont, placeholder: 'キーワードを入力'
+
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li= link_to '記事を作成', new_article_path

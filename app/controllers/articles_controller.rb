@@ -5,7 +5,8 @@ class ArticlesController < ApplicationController
   before_action :check_author, only: [:edit, :update, :destroy]
 
   def index
-    @articles = Article.published.order(:created_at).reverse_order.includes(:author).page(params[:page])
+    @q = Article.ransack(params[:q])
+    @articles = @q.result(distinct: true).published.order(:created_at).reverse_order.includes(:author).page(params[:page])
   end
 
   def new
