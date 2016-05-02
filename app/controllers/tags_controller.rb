@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def index
-    @tags = ActsAsTaggableOn::Tag.most_used
+    @tags = Tag.most_used_in_published
   end
 
   def show
