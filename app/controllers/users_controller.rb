@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def stocks
-    @articles = @user.stocking_articles.published.includes(:author).page(params[:page])
+    @articles = @user.stocking_articles.published.includes(:author).includes(:tags).page(params[:page])
   end
 
   def articles
