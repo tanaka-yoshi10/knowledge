@@ -1,6 +1,8 @@
 class Tag < ActiveRecord::Base
   has_many :tagfollows
   has_many :users, through: :tagfollows
+  has_many :taggings
+  has_many :articles, through: :taggings, source: :taggable
 
   # TODO: acts-as-taggable-onをうまく活用できなかったため、SQLを直接発行して実現している。見直したい。
   scope :most_used_in_published, -> {

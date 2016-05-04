@@ -8,6 +8,10 @@ class Article < ActiveRecord::Base
   validates :body, presence: true
   enum status: { draft: 0, published: 1 }
 
+  scope :tagged_with, ->(tag_name) {
+    Tag.find_by(name: tag_name).articles
+  }
+
   def tag_list
     self.tags.map(&:name)
   end
