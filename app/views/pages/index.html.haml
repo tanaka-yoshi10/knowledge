@@ -1,3 +1,6 @@
 = render partial: 'stream_tabs'
 
+.activities
+  = render partial: @articles
 
+= paginate @articles

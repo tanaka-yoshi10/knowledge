@@ -23,6 +23,13 @@ class Article < ActiveRecord::Base
     add_tags(new_tags - self.tag_list)
   end
 
+  def self.from_tags_followed_by(user)
+    # TODO: 改善できそうな気がする
+    tag_ids = "SELECT tag_id FROM tagfollows WHERE user_id = :user_id"
+    article_ids = "SELECT taggable_id FROM taggings WHERE tag_id IN (#{tag_ids})"
+    where("id IN (#{article_ids})", user_id: user.id)
+  end
+
   private
   def add_tags(tags)
     tags.each do |tag_name|

@@ -72,4 +72,9 @@ class User < ActiveRecord::Base
   def contribution
     self.articles.joins(:stocks).count
   end
+
+  def feed
+    Article.from_tags_followed_by(self)
+    # TODO: 現時点ではフォローしているタグの記事の表示まで(フォローしているユーザに関する情報には未対応)
+  end
 end
