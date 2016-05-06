@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-turbolinks'
 gem 'devise'
 gem 'omniauth-twitter'
+gem 'omniauth-github'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem "redcarpet"

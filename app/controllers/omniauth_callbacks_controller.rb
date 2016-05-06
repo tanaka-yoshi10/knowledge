@@ -1,5 +1,5 @@
 class OmniauthCallbacksController < ApplicationController
-  def twitter
+  def all
     @user = User.from_omniauth(request.env["omniauth.auth"])#.except("extra")
 
     if @user.persisted?
@@ -10,4 +10,7 @@ class OmniauthCallbacksController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
+
+  alias_method :twitter, :all
+  alias_method :github, :all
 end
