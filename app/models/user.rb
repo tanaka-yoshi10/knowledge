@@ -16,9 +16,8 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["nickname"]
+      user.name = auth.info.nickname
+      user.email = auth.info.email
     end
   end
 
@@ -28,6 +27,19 @@ class User < ActiveRecord::Base
         user.attributes = params
         user.valid?
       end
+    else
+      super
+    end
+  end
+
+  def password_required?
+    super && provider.blank?
+  end
+
+  def update_with_password(params, *options)
+    # OAuthで登録した場合パスワードが無い。そのような場合でもプロフィール変更を可能にする。
+    if encrypted_password.blank?
+      update_attributes(params, *options)
     else
       super
     end
