@@ -6,6 +6,6 @@ class PagesController < ApplicationController
   end
 
   def drafts
-    @articles = current_user.articles.draft.order(:created_at).reverse_order.includes(:author).page(params[:page])
+    @articles = current_user.articles.draft.order(:created_at).reverse_order.includes([:author,:tags]).page(params[:page])
   end
 end
