@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'sqlite3'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -20,8 +19,10 @@ gem 'bootstrap-tagsinput-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'ransack'
+gem 'acts-as-taggable-on' # 現在は未使用だが、migrationが失敗するためGemfileに残している
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug'
   gem 'pry-rails'
   gem 'pry-doc'
@@ -58,8 +59,11 @@ group :development do
   gem 'quiet_assets'
 end
 
-
 group :test do
   gem "capybara-webkit"
 end
 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
