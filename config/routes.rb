@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
-  root 'pages#index'
-  get 'drafts', to: 'pages#drafts'
+  root 'welcome#index'
+  get 'drafts', to: 'welcome#drafts'
 
   resources :articles do
     resource :stock, only: [:create, :destroy]
