@@ -1,13 +1,18 @@
 %h1 タグ一覧
 
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th Name
-      %th Count
+.tagsIndexTagsList
+  - @tags.each do |tag|
+    .row
+      .col-sm-4
+        %span.label.label-info= link_to tag.name, tag_url(tag.name)
+        .tagsIndexTagsList_status
+          #{tag.taggings_count} 投稿
+          •
+          #{tag.users.count} フォロワー
+      .col-sm-8
+        - tag.articles.limit(5).each do |article|
+          %ul.list-unstyled
+            %li= link_to(article.title, article)
+    .tagsIndexTagsList_divider
 
-  %tbody
-    - @tags.each do |tag|
-      %tr
-        %td= link_to tag.name, tag_url(tag.name)
-        %td= tag.taggings_count
+-# TODO: pagenation対応の際、most_used_in_publishedでエラーになるため対処が必要
