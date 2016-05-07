@@ -1,16 +1,32 @@
-%h1= @user.name
+.row.user-page
+  .col-md-3.col-sm-3.col-xs-12.newUserPageProfile
+    .newUserPageProfile-header
+      = avatar_image_tag(@user, 270)
 
-.user-follow-form
-  = render partial: 'follow_form', locals: {user: @user}
+      %h1= @user.name
 
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th Title
-      %th Author
+      .user-follow-form
+        = render partial: 'follow_form', locals: {user: @user}
 
-  %tbody
-    - @user.articles.published.includes(:author).each do |article|
-      %tr
-        %td= link_to article.title, article
-        %td= link_to article.author.name, article.author
+    .user-page-profile
+      .user-page-profile-info
+        .user-page-profile-info-heading
+          フォロー中のタグ
+          #{@user.tags.count}
+        .user-page-profile-info-body
+          - @user.tags.each do |tag|
+            %span.label.label-info= link_to tag.name, tag_url(tag.name)
+
+      .user-page-profile-info
+        .user-page-profile-info-heading
+          フォロー中のユーザー
+          #{@user.followed_users.count}
+        .user-page-profile-info-body
+          - @user.followed_users.each do |followed_user|
+            = avatar_image_tag(followed_user, 20)
+
+  .col-md-9.col-sm-9.col-xs-12
+    .activities
+      = render partial: @user.articles.includes([:author, :tags]).order(:created_at).reverse_order.limit(10)
+
+  -# TODO: paginate等の対応
