@@ -3,5 +3,5 @@
   %li{class: current_page?(root_path) && "active"}= link_to 'フィード', root_path
   %li{:class => current_page?(articles_path) && "active"}= link_to 'すべての投稿', articles_path
   %li{:class => current_page?(stocks_user_path(current_user)) && "active"}= link_to 'ストック', stocks_user_path(current_user)
-  %li{:class => current_page?(articles_user_path(current_user)) && "active"}= link_to '自分の投稿', articles_user_path(current_user)
+  %li{:class => current_page?(mine_path) && "active"}= link_to '自分の投稿', mine_path
 

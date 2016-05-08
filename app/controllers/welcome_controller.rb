@@ -8,4 +8,8 @@ class WelcomeController < ApplicationController
   def drafts
     @articles = current_user.articles.draft.order(:created_at).reverse_order.includes([:author,:tags]).page(params[:page])
   end
+
+  def mine
+    @articles = current_user.articles.published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
+  end
 end
