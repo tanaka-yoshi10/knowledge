@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get :stocks
       get :articles
+      get :followers
     end
     resource :relationship, only: [:create, :destroy], path: 'follow'
     resource :profile, except: [:destroy]

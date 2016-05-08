@@ -12,7 +12,8 @@
       .user-page-profile-info
         .user-page-profile-info-heading
           フォロー中のタグ
-          #{@user.tags.count}
+          %span.newUserPageProfile_count
+            #{@user.tags.count}
         .user-page-profile-info-body
           - @user.tags.each do |tag|
             %span.label.label-info= link_to tag.name, tag_url(tag.name)
@@ -20,10 +21,20 @@
       .user-page-profile-info
         .user-page-profile-info-heading
           フォロー中のユーザー
-          #{@user.followed_users.count}
+          %span.newUserPageProfile_count
+            #{@user.followed_users.count}
         .user-page-profile-info-body
           - @user.followed_users.each do |followed_user|
             = avatar_image_tag(followed_user, 20)
+
+      .user-page-profile-info
+        .user-page-profile-info-heading
+          フォロワー
+          %span.newUserPageProfile_count
+            #{link_to @user.followers.count, followers_user_path(@user)}
+        .user-page-profile-info-body
+          - @user.followers.each do |follower|
+            = avatar_image_tag(follower, 20)
 
   .col-md-9.col-sm-9.col-xs-12
     .activities
