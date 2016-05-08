@@ -1,2 +1,2 @@
-$('.user-follow-form').html("<%= j render(partial:'users/follow_form', locals: {user: @user}) %>")
+$('.user-follow-form').html("<%= j render('users/follow_form', user: @user) %>")
 <%# TODO: @userで渡されるのはわかりにくいかも。 destroyと同じ処理、DRYにできないか？ %>
