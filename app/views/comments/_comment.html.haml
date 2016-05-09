@@ -1,4 +1,4 @@
-.comment
+= div_for(comment) do
   .comment-header
     .comment-header-creator
       %div
@@ -10,7 +10,7 @@
         = l comment.created_at
       %div
         - if comment.user == current_user
-          = link_to '削除', [comment.article, comment], :method => :delete, :data => { :confirm => 'このコメントを削除していいですか?' }
+          = link_to '削除', [comment.article, comment], :method => :delete, :remote => true, :data => { :confirm => 'このコメントを削除していいですか?' }
   .comment-content
     .markdown-content
       ~ markdown_to_html(comment.body)

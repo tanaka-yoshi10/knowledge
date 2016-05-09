@@ -13,11 +13,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    comment.destroy
-    redirect_to @article, notice: 'Comment was successfully destroyed.'
-    # TODO: Ajaxにしたい
-    # 現状はcommentにidつけていないため、削除後はreloadさせるために@articleにredirectしている
+    @comment = Comment.find(params[:id])
+
+    if @comment.destroy
+    else
+      render :error
+    end
   end
 
   private
