@@ -5,10 +5,6 @@ class ProfilesController < ApplicationController
   def show
   end
 
-  def new
-    @profile = current_user.build_profile
-  end
-
   def edit
   end
 
