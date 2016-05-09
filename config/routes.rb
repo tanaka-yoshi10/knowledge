@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'drafts', to: 'welcome#drafts'
   get 'mine', to: 'welcome#mine'
+  get 'stocks', to: 'welcome#stocks'
 
   resources :articles do
     resource :stock, only: [:create, :destroy]

@@ -1,4 +1,5 @@
-= render partial: 'welcome/stream_tabs'
+.userPage_ribbon
+  #{link_to @user.name, @user} / ストックした投稿
 
 .activities
   = render partial: @articles

@@ -12,4 +12,8 @@ class WelcomeController < ApplicationController
   def mine
     @articles = current_user.articles.published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
   end
+
+  def stocks
+    @articles = current_user.stocking_articles.published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
+  end
 end
