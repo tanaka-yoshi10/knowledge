@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user
+  before_action :require_my_profile, only: [:edit, :update, :create]
   before_action :set_profile, only: [:show, :edit, :update]
 
   def show
@@ -27,8 +29,18 @@ class ProfilesController < ApplicationController
   end
 
   private
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
+    def require_my_profile
+      if @user != current_user
+        redirect_to @user, notice: 'プロフィールを編集できるのは本人のみです'
+      end
+    end
+
     def set_profile
-      @profile = current_user.profile || current_user.build_profile
+      @profile = @user.profile || @user.build_profile
     end
 
     def profile_params
