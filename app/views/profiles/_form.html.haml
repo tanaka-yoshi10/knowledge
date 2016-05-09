@@ -1,8 +1,8 @@
-= simple_form_for @profile, :url => user_profile_path(current_user) do |f|
+= simple_form_for @profile, :url => profile_path, html: { method: :put } do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :blog_url
   = f.input :organization
-  = f.input :introducion
+  = f.input :introducion, as: :text
   = f.input :qiita_id
   = f.button :submit
