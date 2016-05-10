@@ -1,0 +1,10 @@
+- content_for :content do
+  .landingHeader
+    .row
+      .col-sm-7
+        .landingHeaderCatchCopy
+          %h1 プログラマのための技術情報共有サービスです。
+      .col-sm-5
+        = yield
+
+= render template: 'layouts/application'

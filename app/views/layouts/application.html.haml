@@ -43,4 +43,4 @@
     .container
       - flash.each do |type, msg|
         %div{class: "alert alert-#{type}"}= msg
-      = yield
+      = content_for?(:content) ? yield(:content) : yield
