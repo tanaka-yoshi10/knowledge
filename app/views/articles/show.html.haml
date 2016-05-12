@@ -6,12 +6,12 @@
           %h1.article-title= @article.title
           .tag-area
             -@article.tag_list.each do |tag|
-              %span.label.label-info= link_to tag, tag_url(tag)
+              %span.label.label-info= link_to tag, tag_path(tag)
           .article-contorl
             = avatar_image_tag(@article.author, 25)
             #{link_to @article.author.name, @article.author}が#{l @article.created_at}に投稿
             - if @article.author == current_user
-              = link_to '編集', edit_article_url(@article), :class => 'btn btn-primary'
+              = link_to '編集', edit_article_path(@article), :class => 'btn btn-primary'
               = link_to '削除', @article, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
         .col-sm-3
           %ul.list-unstyled.article-header-stock-status-list

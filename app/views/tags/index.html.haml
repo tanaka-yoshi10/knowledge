@@ -4,7 +4,7 @@
   - @tags.each do |tag|
     .row
       .col-sm-4
-        %span.label.label-info= link_to tag.name, tag_url(tag.name)
+        %span.label.label-info= link_to tag.name, tag_path(tag.name)
         .tagsIndexTagsList_status
           #{tag.taggings_count} 投稿
           •

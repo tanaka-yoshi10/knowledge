@@ -7,4 +7,4 @@
     .item-box-title
       %strong= link_to article.title, article
       - article.tag_list.each do |tag|
-        %span.label.label-info= link_to tag, tag_url(tag)
+        %span.label.label-info= link_to tag, tag_path(tag)

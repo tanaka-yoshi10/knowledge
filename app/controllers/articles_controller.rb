@@ -50,13 +50,13 @@ class ArticlesController < ApplicationController
 
   def check_draft
     if @article.draft? && @article.author != current_user
-      redirect_to root_path, notice: 'この記事は下書きです'
+      redirect_to root_url, notice: 'この記事は下書きです'
     end
   end
 
   def check_author
     if @article.author != current_user
-      redirect_to root_path, notice: 'この記事を編集できるのは著者のみです'
+      redirect_to root_url, notice: 'この記事を編集できるのは著者のみです'
     end
   end
 
