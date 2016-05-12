@@ -3,12 +3,29 @@
     .newUserPageProfile-header
       = avatar_image_tag(@user, 270)
 
-      %h1= @user.name
+      - if @user.profile && (@user.profile.first_name.present? || @user.profile.last_name.present?)
+        %h2= "#{@user.profile.first_name} #{@user.profile.last_name}"
+
+      %h2= "@#{@user.name}"
 
       .user-follow-form
         = render partial: 'follow_form', locals: {user: @user}
 
     .user-page-profile
+      - if @user.profile.try!(:introducion).try!(:present?)
+        .user-page-profile-info
+          #{@user.profile.introducion}
+      .user-page-profile-info
+        - if @user.profile.try!(:blog_url).try!(:present?)
+          .user-page-profile-info-body
+            = link_to @user.profile.blog_url
+        - if @user.profile.try!(:organization).try!(:present?)
+          .user-page-profile-info-body
+            #{@user.profile.organization}
+        - if @user.profile.try!(:qiita_id).try!(:present?)
+          .user-page-profile-info-body
+            = link_to 'Qiita', "http://qiita.com/#{@user.profile.qiita_id}"
+
       .user-page-profile-info
         .user-page-profile-info-heading
           フォロー中のタグ
