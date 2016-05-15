@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   before_action :authenticate_user!
 
+  # TODO: もう少しすっきりかけないか
   def index
     @articles = current_user.feed.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
   end

@@ -1,17 +1,18 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:twitter, :github]
+
   has_many :articles, foreign_key: :author_id
   has_many :stocks, dependent: :destroy
   has_many :relationships, foreign_key: :follower_id, dependent: :destroy
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy
-  # TODO 上の文字列はシンボルにできないのか？
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :tagfollows, dependent: :destroy
   has_many :tags, through: :tagfollows
   has_many :stocking_articles, through: :stocks, source: :article
   has_one :profile, dependent: :destroy
+
   validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)

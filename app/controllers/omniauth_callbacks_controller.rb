@@ -1,6 +1,7 @@
 class OmniauthCallbacksController < ApplicationController
   def all
     @user = User.from_omniauth(request.env["omniauth.auth"])#.except("extra")
+    # TODO: extraとかまだよくわかっていない。要調査
 
     if @user.persisted?
       flash.notice = "ログインしました！"

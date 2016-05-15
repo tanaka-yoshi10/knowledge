@@ -4,8 +4,10 @@ class Article < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :taggings, foreign_key: :taggable_id
   has_many :tags, through: :taggings
+
   validates :title, presence: true
   validates :body, presence: true
+
   enum status: { draft: 0, published: 1 }
 
   scope :tagged_with, ->(tag_name) {

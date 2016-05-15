@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
-  before_action :check_draft, only: [:show, :edit, :update, :destroy]
+  before_action :require_draft_author, only: [:show]
   before_action :check_author, only: [:edit, :update, :destroy]
 
   def index
@@ -9,24 +9,24 @@ class ArticlesController < ApplicationController
     @articles = @q.result(distinct: true).published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
   end
 
+  def show
+  end
+
   def new
     @article = current_user.articles.build
+  end
+
+  def edit
   end
 
   def create
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      render :show, status: :created, location: @article
+      redirect_to @article, notice: 'Article was successfully created.'
     else
       render :new
     end
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   def update
@@ -38,9 +38,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy! # TODO !をつける？つけない？
-    redirect_to current_user, notice: 'Article was successfully destroyed.'
-    # TODO: redirect先を再考
+    @article.destroy
+    redirect_to root_url, notice: 'Article was successfully destroyed.'
   end
 
   private
@@ -48,7 +47,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def check_draft
+  def require_draft_author
     if @article.draft? && @article.author != current_user
       redirect_to root_url, notice: 'この記事は下書きです'
     end
@@ -56,7 +55,7 @@ class ArticlesController < ApplicationController
 
   def check_author
     if @article.author != current_user
-      redirect_to root_url, notice: 'この記事を編集できるのは著者のみです'
+      redirect_to @article, notice: 'この記事を編集できるのは著者のみです'
     end
   end
 
