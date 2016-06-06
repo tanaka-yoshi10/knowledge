@@ -19,7 +19,7 @@ class Article < ActiveRecord::Base
   end
 
   def tag_list=(value)
-    new_tags = value.split(',')
+    new_tags = value.split(',').map(&:strip)
 
     delete_tags(self.tag_list - new_tags)
     add_tags(new_tags - self.tag_list)
