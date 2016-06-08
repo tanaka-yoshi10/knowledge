@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
-    # [review] find_or_create_byを使うほうが多いです。
+    # [review] find_or_create_byを使うほうが読みやすいです
     # find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
       user.name = auth.info.nickname
@@ -54,12 +54,13 @@ class User < ActiveRecord::Base
   end
 
   def unstock!(article)
-    # [review] destroy! としたいです
+    # [review] メソッド名がunstock! なので動作的には destroy! としたいです
     stocks.find_by(article: article).destroy
   end
 
   def stocking?(article)
     # [review] 存在を確認するだけであれば以下のように書く方が効率的です。
+    # 発行されるSQLを比較すると違いがわかります
     # stocks.exists?(article: article)
     stocks.find_by(article: article).present?
   end
@@ -94,7 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def contribution
-    # [review] stocks と joinするのは何故でしょうか？
+    # [review][質問] stocks と joinするのは何故でしょうか？
     self.articles.joins(:stocks).count
   end
 

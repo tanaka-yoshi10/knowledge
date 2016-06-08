@@ -21,7 +21,7 @@
     = f.text_area :body, class: "form-control", size: "10x20"
 
   .form-group
-    -# [review] 日本語化したいですね。
+    -# [review] 日本語化までチャレンジしたいですね。
     = f.select :status, Article.statuses.keys.to_a, {}, class: 'form-control'
 
   .actions

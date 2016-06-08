@@ -20,6 +20,7 @@ module ApplicationHelper
   end
 
   # [review] link_to_user_with_avatar みたいな名前のほうが適切な気がします。
+  # 画像タグを生成するだけかとおもいきやリンクが生成されるみたいな、、
   def avatar_image_tag(user, size)
     link_to image_tag(avatar_url(user, size)), user
   end

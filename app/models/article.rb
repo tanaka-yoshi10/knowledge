@@ -5,7 +5,8 @@ class Article < ActiveRecord::Base
   has_many :taggings, foreign_key: :taggable_id
   has_many :tags, through: :taggings
 
-  # [review] validates :author, presence: true
+  # [review] ↓のように丁寧にチェックをかけたほうがアプリの作りが固くなります
+  # validates :author, presence: true
   validates :title, presence: true
   validates :body, presence: true
 

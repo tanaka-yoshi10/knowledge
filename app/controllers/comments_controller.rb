@@ -13,11 +13,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # [reviwe] @article.comments.find(params[:id])
+    # [reviwe] @article.comments.find(params[:id]) といったように article オブジェクトから引くほうが、作りが固くなります。
     # before_action に set_comment を用意してそちらでやることが多いです。
     @comment = Comment.find(params[:id])
 
-    # [review] 任意のコメントを消すことが出来るのでは？
+    # [review][セキュリティ] 任意のコメントを消すことが出来るのでは？
     if @comment.destroy
     else
       render :error
