@@ -3,6 +3,11 @@
     .newUserPageProfile-header
       = avatar_image_tag(@user, 270)
 
+      -# [review] 条件箇所をモデルかヘルパに移したいです
+      -# viewにロジックが多少入り過ぎかなというのと、単純に読みにくいです。
+      -# 以下のように書けるのが読みやすい気も。
+      -# - if @user.profile.try(:full_name).present?
+      -#   %h2= @user.profile.full_name
       - if @user.profile && (@user.profile.first_name.present? || @user.profile.last_name.present?)
         %h2= "#{@user.profile.first_name} #{@user.profile.last_name}"
 
@@ -11,6 +16,8 @@
       .user-follow-form
         = render partial: 'follow_form', locals: {user: @user}
 
+    -# [review] @user.profile.try! だらけなのをDRYにしたいです
+    -# @user.profile が存在しなかったら .user-page-profile ブロック自体表示する必要ないのでは？
     .user-page-profile
       - if @user.profile.try!(:introduction).try!(:present?)
         .user-page-profile-info

@@ -5,6 +5,7 @@
         .col-sm-9
           %h1.article-title= @article.title
           .tag-area
+            -# [review] -の後にスペース欲しいです
             -@article.tag_list.each do |tag|
               %span.label.label-info= link_to tag, tag_path(tag)
           .article-contorl
@@ -27,6 +28,8 @@
 
       %hr
 
+      -# jsの為にID付けるのであれば js prefixが欲しいです。
+      -# https://www.cyberagent.co.jp/techinfo/techreport/report/id=7926#section16
       #comments
         = render @article.comments.includes(:user)
 
@@ -37,6 +40,7 @@
               コメントを投稿する
             .comment-form-content
               .form-group
+                -# [review] ダブルクオートとシングルクォートの混在が気になりました。どちらでもいいけど統一したいなと、、
                 = f.text_area :body, class: "form-control", id: "comment_field", placeholder: "コメントを入力してください"
               .actions
                 = f.submit 'Save'
@@ -50,4 +54,6 @@
             #{@article.author.contribution} contribution
           %div
             .user-follow-form
+              -# [review] 細かいけどlocals無しでも大丈夫です。
+              -# = render partial: 'users/follow_form', user: @article.author
               = render partial: 'users/follow_form', locals: {user: @article.author}

@@ -10,6 +10,9 @@ class RelationshipsController < ApplicationController
   def destroy
     current_user.unfollow!(@user)
     # TODO: エラー時の考慮
+
+    # [review] viewの内容が同じであれば以下のようにしてviewを1つにしたほうがDRYです
+    # render :create
   end
 
   private

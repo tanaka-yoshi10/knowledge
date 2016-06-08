@@ -1,3 +1,5 @@
+-# [review] パーシャルテンプレートの中でインスタンス変数を利用するのはわかりにくいし、使い回しにくくなるので良くないです。
+-# http://kadoppe.com/archives/2013/09/rails-partial-template-instance-variables.html
 - if current_user.try!(:stocking?, @article)
   = link_to 'ストック解除', article_stock_path(@article), method: :delete, remote: true, class: 'btn btn-primary'
 - else

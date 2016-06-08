@@ -1,6 +1,9 @@
 = render partial: 'stream_tabs'
 
+-# [review] _activities というパーシャルを作ったほうがDRYだと思います
+-# 以降スルーします
 .activities
+  -# [review] = render @articles
   = render partial: @articles
 
 = paginate @articles

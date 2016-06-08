@@ -10,6 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ * [review] sassの@importを使って読み込みたいです。
+ * http://terkel.jp/archives/2011/03/sass-at-import-rule/
  *= require_tree .
  *= require bootstrap-tagsinput
  *= require_self

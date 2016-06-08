@@ -9,6 +9,7 @@
       %div
         = l comment.created_at
       %div
+        -# [review] コントローラ側でもコメントしましたが、viewだけでなくコントローラ側でもチェックしましょう
         - if comment.user == current_user
           = link_to '削除', [comment.article, comment], :method => :delete, :remote => true, :data => { :confirm => 'このコメントを削除していいですか?' }
   .comment-content

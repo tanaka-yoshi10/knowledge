@@ -16,9 +16,12 @@
 
   .form-group
     = f.label :body
+    -# [review] cols=10 の指定がcssでのwidth指定に負けていて意味ないので無くしたいです。
+    -# = f.text_area :body, class: "form-control", rows: "20"
     = f.text_area :body, class: "form-control", size: "10x20"
 
   .form-group
+    -# [review] 日本語化までチャレンジしたいですね。
     = f.select :status, Article.statuses.keys.to_a, {}, class: 'form-control'
 
   .actions

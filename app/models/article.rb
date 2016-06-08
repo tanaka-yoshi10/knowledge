@@ -5,22 +5,30 @@ class Article < ActiveRecord::Base
   has_many :taggings, foreign_key: :taggable_id
   has_many :tags, through: :taggings
 
+  # [review] ↓のように丁寧にチェックをかけたほうがアプリの作りが固くなります
+  # validates :author, presence: true
   validates :title, presence: true
   validates :body, presence: true
 
   enum status: { draft: 0, published: 1 }
 
+  # [review] チェーンできないものはscopeではなくメソッドにするのが適切です。
   scope :tagged_with, ->(tag_name) {
     Tag.find_by(name: tag_name).articles
   }
 
   def tag_list
+    # [review] self.tags.pluck(:name) の方が効率的です。
     self.tags.map(&:name)
   end
 
   def tag_list=(value)
+    # [review] 前後の余計なスペースを除去したい気がします。
+    # 【tag1, tag2, tag3】といった入力も許容してほしいです。
     new_tags = value.split(',')
 
+    # [review] tag_listに代入するだけでsaveやdestroyが発生するのは怖いです。
+    # 出来ればsaveのタイミングで何とかしたいところ
     delete_tags(self.tag_list - new_tags)
     add_tags(new_tags - self.tag_list)
   end

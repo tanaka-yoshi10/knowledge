@@ -2,6 +2,8 @@
   #{link_to @user.name, @user} / ストックした投稿
 
 .activities
+  -# [review] 細かいですけど、どうせテンプレート名を省略するのであれば以下のように書けます。
+  -# = render @articles
   = render partial: @articles
 
 = paginate @articles

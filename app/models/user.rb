@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:twitter, :github]
 
+  # [review] dependent: :destroy の指定は必要ないでしょうか？
   has_many :articles, foreign_key: :author_id
   has_many :stocks, dependent: :destroy
   has_many :relationships, foreign_key: :follower_id, dependent: :destroy
@@ -16,6 +17,8 @@ class User < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
+    # [review] find_or_create_byを使うほうが読みやすいです
+    # find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
       user.name = auth.info.nickname
       user.email = auth.info.email
@@ -51,10 +54,14 @@ class User < ActiveRecord::Base
   end
 
   def unstock!(article)
+    # [review] メソッド名がunstock! なので動作的には destroy! としたいです
     stocks.find_by(article: article).destroy
   end
 
   def stocking?(article)
+    # [review] 存在を確認するだけであれば以下のように書く方が効率的です。
+    # 発行されるSQLを比較すると違いがわかります
+    # stocks.exists?(article: article)
     stocks.find_by(article: article).present?
   end
 
@@ -63,10 +70,13 @@ class User < ActiveRecord::Base
   end
 
   def unfollow!(other_user)
+    # [review] destroy! としたいです
     relationships.find_by(followed_id: other_user.id).destroy
   end
 
   def following?(other_user)
+    # [review] 存在を確認するだけであれば以下のように書く方が効率的です。
+    # relationships.exists?(followed_id: other_user.id)
     relationships.find_by(followed_id: other_user.id).present?
   end
 
@@ -79,10 +89,13 @@ class User < ActiveRecord::Base
   end
 
   def following_tag?(tag)
+    # [review] 存在を確認するだけであれば以下のように書く方が効率的です。
+    # tagfollows.exists?(tag: tag)
     tagfollows.find_by(tag: tag).present?
   end
 
   def contribution
+    # [review][質問] stocks と joinするのは何故でしょうか？
     self.articles.joins(:stocks).count
   end
 

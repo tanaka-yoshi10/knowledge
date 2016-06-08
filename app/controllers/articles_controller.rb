@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
 
   def index
     @q = Article.ransack(params[:q])
+    # [review] reverse_orderを使うよりもorder(created_at: :desc)と書くほうが読みやすいし直感的な気がします。
     @articles = @q.result(distinct: true).published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
   end
 
@@ -47,6 +48,8 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  # [review] メソッド名だけだと動きが想像しにくかったです。
+  # require_author_if_draft みたいな方がわかりやすいかなと。
   def require_draft_author
     if @article.draft? && @article.author != current_user
       redirect_to root_url, notice: 'この記事は下書きです'
@@ -55,6 +58,8 @@ class ArticlesController < ApplicationController
 
   def check_author
     if @article.author != current_user
+      # [review] 削除の場合もこのメッセージで大丈夫ですか？
+      # 通常アクセスでは発生しないエラーなので「権限がありません」みたいな簡潔なメッセージで十分な気がします。
       redirect_to @article, notice: 'この記事を編集できるのは著者のみです'
     end
   end

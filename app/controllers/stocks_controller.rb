@@ -10,6 +10,8 @@ class StocksController < ApplicationController
   def destroy
     current_user.unstock!(@article)
     # TODO: エラー時の考慮
+    # [review] ここも以下のようにviewを1つにしてDRYにしたいです
+    # render :create
   end
 
   private
