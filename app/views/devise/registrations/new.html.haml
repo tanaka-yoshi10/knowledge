@@ -7,6 +7,7 @@
   .field
     = f.label :email
     %br/
+    -# [review] autofocus指定が2つあることによって、2番目のフィールドに最初にフォーカスされるのが気になります。
     = f.email_field :email, autofocus: true
   - if f.object.password_required?
     .field

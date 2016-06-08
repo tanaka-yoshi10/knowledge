@@ -13,8 +13,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    # [reviwe] @article.comments.find(params[:id])
+    # before_action に set_comment を用意してそちらでやることが多いです。
     @comment = Comment.find(params[:id])
 
+    # [review] 任意のコメントを消すことが出来るのでは？
     if @comment.destroy
     else
       render :error

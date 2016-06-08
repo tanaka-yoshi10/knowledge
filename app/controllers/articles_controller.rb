@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
 
   def index
     @q = Article.ransack(params[:q])
+    # [review] reverse_orderを使うよりもorder(created_at: :desc)と書くほうが多いです。
     @articles = @q.result(distinct: true).published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
   end
 
@@ -47,6 +48,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  # [review] require_author_if_draft みたいな方がわかりやすいです。
   def require_draft_author
     if @article.draft? && @article.author != current_user
       redirect_to root_url, notice: 'この記事は下書きです'
@@ -55,6 +57,7 @@ class ArticlesController < ApplicationController
 
   def check_author
     if @article.author != current_user
+      # [review] 削除の場合もこのメッセージで大丈夫ですか？
       redirect_to @article, notice: 'この記事を編集できるのは著者のみです'
     end
   end

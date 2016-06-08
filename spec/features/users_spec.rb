@@ -14,6 +14,7 @@ feature 'User management' do
 
   scenario 'show user' do
     user = create(:user)
+    # [review] 使っていない変数は削除しましょー
     article = create(:article, author: user)
 
     visit user_path(user)

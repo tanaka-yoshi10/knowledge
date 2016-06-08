@@ -2,4 +2,6 @@
   - if current_user.try!(:following?, user)
     = link_to "フォロー解除", user_relationship_path(user), method: :delete, remote: true, class: 'btn btn-default'
   - else
+    -# [review] 未ログインユーザがボタンを押した場合の動作が不親切な気がします。
+    -# 未ログインユーザもボタンを押せるようにするなら、せめてログインページに飛ばすか何かしらのエラーメッセージが欲しいです。
     = link_to "フォロー", user_relationship_path(user), method: :post, remote: true, class: 'btn btn-primary'

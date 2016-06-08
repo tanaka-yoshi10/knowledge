@@ -15,6 +15,7 @@ class ProfilesController < ApplicationController
 
   private
   def set_profile
+    # [review] viewで無理やり update アクションに飛ばすのであれば、ここで create したほうがいいです
     @profile = current_user.profile || current_user.build_profile
   end
 

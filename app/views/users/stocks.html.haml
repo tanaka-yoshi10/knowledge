@@ -2,6 +2,7 @@
   #{link_to @user.name, @user} / ストックした投稿
 
 .activities
+  -# [review] = render @articles
   = render partial: @articles
 
 = paginate @articles
