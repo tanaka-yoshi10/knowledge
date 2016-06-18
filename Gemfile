@@ -20,7 +20,6 @@ gem 'bootstrap-tagsinput-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'ransack'
-gem 'acts-as-taggable-on' # 現在は未使用だが、migrationが失敗するためGemfileに残している
 
 group :development, :test do
   gem 'sqlite3'
