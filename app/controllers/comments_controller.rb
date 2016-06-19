@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_article
+  before_action :set_comment, except: [:create]
   before_action :authenticate_user!
 
   def create
@@ -13,8 +14,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-
     if @comment.destroy
     else
       render :error
@@ -24,6 +23,10 @@ class CommentsController < ApplicationController
   private
     def set_article
       @article = Article.find(params[:article_id])
+    end
+
+    def set_comment
+      @comment = @article.comments.find(params[:id])
     end
 
     def comment_params
