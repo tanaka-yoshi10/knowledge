@@ -20,6 +20,7 @@ gem 'bootstrap-tagsinput-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'ransack'
+gem 'enumerize'
 
 group :development, :test do
   gem 'sqlite3'

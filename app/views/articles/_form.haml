@@ -19,7 +19,7 @@
     = f.text_area :body, class: "form-control", rows: "20"
 
   .form-group
-    = f.select :status, Article.statuses.keys.to_a, {}, class: 'form-control'
+    = f.select :status, Article.status.options, {}, class: 'form-control'
 
   .actions
     = f.submit

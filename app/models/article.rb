@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  extend Enumerize
+
   belongs_to :author, class_name: User
   has_many :stocks, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -9,7 +11,9 @@ class Article < ActiveRecord::Base
   validates :body, presence: true
   validates :author, presence: true
 
-  enum status: { draft: 0, published: 1 }
+  enumerize :status, in: { draft: 0, published: 1 }, scope: true, predicates: true
+  scope :published, -> { with_status(:published) }
+  scope :draft, -> { with_status(:draft) }
 
   def self.tagged_with(tag_name)
     Tag.find_by(name: tag_name).articles
