@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def unstock!(article)
-    stocks.find_by(article: article).destroy
+    stocks.find_by(article: article).destroy!
   end
 
   def stocking?(article)
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
+    relationships.find_by(followed_id: other_user.id).destroy!
   end
 
   def following?(other_user)
