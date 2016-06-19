@@ -1,5 +1,7 @@
 module ApplicationHelper
   def markdown_to_html(text)
+    return '' if text.blank?
+
     markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true, xhtml: true),
                                        autolink: true,
                                        space_after_headers: true,
@@ -8,8 +10,7 @@ module ApplicationHelper
                                        tables: true,
                                        lax_html_blocks: true,
                                        strikethrough: true
-
-    markdown.render(text).html_safe unless text.blank?
+    markdown.render(text).html_safe
   end
 
   def avatar_url(user, size)
