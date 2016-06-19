@@ -18,7 +18,7 @@
             %li #{@article.stocks.count} ストック
             %li #{@article.comments.count} コメント
           .article-stock
-            = render 'stock_form'
+            = render 'stock_form', article: @article
 
 .row
   .container

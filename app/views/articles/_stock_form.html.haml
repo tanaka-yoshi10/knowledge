@@ -1,4 +1,4 @@
-- if current_user.try!(:stocking?, @article)
-  = link_to 'ストック解除', article_stock_path(@article), method: :delete, remote: true, class: 'btn btn-primary'
+- if current_user.try!(:stocking?, article)
+  = link_to 'ストック解除', article_stock_path(article), method: :delete, remote: true, class: 'btn btn-primary'
 - else
-  = link_to "ストック", article_stock_path(@article), method: :post, remote: true, class: 'btn btn-primary'
+  = link_to "ストック", article_stock_path(article), method: :post, remote: true, class: 'btn btn-primary'
