@@ -7,6 +7,7 @@ class Article < ActiveRecord::Base
 
   validates :title, presence: true
   validates :body, presence: true
+  validates :author, presence: true
 
   enum status: { draft: 0, published: 1 }
 
