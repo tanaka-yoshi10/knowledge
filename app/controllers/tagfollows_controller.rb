@@ -10,6 +10,7 @@ class TagfollowsController < ApplicationController
   def destroy
     current_user.unfollow_tag!(@tag)
     # TODO: エラー時の考慮
+    render :create
   end
 
   private

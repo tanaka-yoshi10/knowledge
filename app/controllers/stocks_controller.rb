@@ -10,6 +10,7 @@ class StocksController < ApplicationController
   def destroy
     current_user.unstock!(@article)
     # TODO: エラー時の考慮
+    render :create
   end
 
   private

@@ -10,6 +10,7 @@ class RelationshipsController < ApplicationController
   def destroy
     current_user.unfollow!(@user)
     # TODO: エラー時の考慮
+    render :create
   end
 
   private
