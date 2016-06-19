@@ -15,6 +15,6 @@ class TagfollowsController < ApplicationController
 
   private
   def set_tag
-    @tag = Tag.find_by(name: params[:tag_name])
+    @tag = Tag.find_by!(name: params[:tag_name])
   end
 end
