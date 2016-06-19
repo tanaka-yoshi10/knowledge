@@ -5,7 +5,7 @@
   - @followers.each do |user|
     .tableList_item
       .tableList_avatarCell
-        = avatar_image_tag(user, 48)
+        = link_to_user_with_avatar(user, 48)
       .tableList_cell
         = link_to user.name, user
       .tableList_cell

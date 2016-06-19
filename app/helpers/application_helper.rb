@@ -17,7 +17,7 @@ module ApplicationHelper
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
-  def avatar_image_tag(user, size)
+  def link_to_user_with_avatar(user, size)
     link_to image_tag(avatar_url(user, size)), user
   end
 end

@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
-  before_action :require_draft_author, only: [:show]
+  before_action :require_author_if_draft, only: [:show]
   before_action :check_author, only: [:edit, :update, :destroy]
 
   def index
@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def require_draft_author
+  def require_author_if_draft
     if @article.draft? && @article.author != current_user
       redirect_to root_url, notice: 'この記事は下書きです'
     end

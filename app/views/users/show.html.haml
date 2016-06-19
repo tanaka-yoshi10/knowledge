@@ -1,7 +1,7 @@
 .row.user-page
   .col-md-3.col-sm-3.col-xs-12.newUserPageProfile
     .newUserPageProfile-header
-      = avatar_image_tag(@user, 270)
+      = link_to_user_with_avatar(@user, 270)
 
       - if @user.profile && (@user.profile.first_name.present? || @user.profile.last_name.present?)
         %h2= "#{@user.profile.first_name} #{@user.profile.last_name}"
@@ -42,7 +42,7 @@
             #{@user.followed_users.count}
         .user-page-profile-info-body
           - @user.followed_users.each do |followed_user|
-            = avatar_image_tag(followed_user, 20)
+            = link_to_user_with_avatar(followed_user, 20)
 
       .user-page-profile-info
         .user-page-profile-info-heading
@@ -51,7 +51,7 @@
             #{link_to @user.followers.count, followers_user_path(@user)}
         .user-page-profile-info-body
           - @user.followers.each do |follower|
-            = avatar_image_tag(follower, 20)
+            = link_to_user_with_avatar(follower, 20)
 
   .col-md-9.col-sm-9.col-xs-12
     .activities

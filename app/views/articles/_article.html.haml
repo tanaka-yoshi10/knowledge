@@ -1,6 +1,6 @@
 .item-box
   .item-box-avatar
-    = avatar_image_tag(article.author, 40)
+    = link_to_user_with_avatar(article.author, 40)
   %div
     .item-box-header
       #{link_to article.author.name, article.author}が#{l article.created_at}に投稿しました
