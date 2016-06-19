@@ -1,7 +1,7 @@
 class Tag < ActiveRecord::Base
-  has_many :tagfollows
+  has_many :tagfollows, dependent: :destroy
   has_many :users, through: :tagfollows
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :articles, through: :taggings, source: :taggable
 
   scope :most_used_in_published, -> {

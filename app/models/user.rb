@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:twitter, :github]
 
-  has_many :articles, foreign_key: :author_id
+  has_many :articles, foreign_key: :author_id, dependent: :destroy
   has_many :stocks, dependent: :destroy
   has_many :relationships, foreign_key: :follower_id, dependent: :destroy
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy

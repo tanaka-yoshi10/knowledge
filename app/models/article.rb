@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
   belongs_to :author, class_name: User
   has_many :stocks, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :taggings, foreign_key: :taggable_id
+  has_many :taggings, foreign_key: :taggable_id, dependent: :destroy
   has_many :tags, through: :taggings
 
   validates :title, presence: true
