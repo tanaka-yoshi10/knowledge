@@ -16,7 +16,7 @@ class Article < ActiveRecord::Base
   end
 
   def tag_list
-    self.tags.map(&:name)
+    self.tags.pluck(:name)
   end
 
   def tag_list=(value)
