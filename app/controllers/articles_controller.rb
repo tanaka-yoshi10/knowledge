@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 
   def index
     @q = Article.ransack(params[:q])
-    @articles = @q.result(distinct: true).published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
+    @articles = @q.result(distinct: true).published.order(created_at: :desc).includes([:author, :tags]).page(params[:page])
   end
 
   def show
