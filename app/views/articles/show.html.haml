@@ -50,4 +50,4 @@
             #{@article.author.contribution} contribution
           %div
             .user-follow-form
-              = render partial: 'users/follow_form', locals: {user: @article.author}
+              = render 'users/follow_form', user: @article.author
