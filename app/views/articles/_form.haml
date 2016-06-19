@@ -16,7 +16,7 @@
 
   .form-group
     = f.label :body
-    = f.text_area :body, class: "form-control", size: "10x20"
+    = f.text_area :body, class: "form-control", rows: "20"
 
   .form-group
     = f.select :status, Article.statuses.keys.to_a, {}, class: 'form-control'
