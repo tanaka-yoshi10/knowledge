@@ -11,9 +11,9 @@ class Article < ActiveRecord::Base
 
   enum status: { draft: 0, published: 1 }
 
-  scope :tagged_with, ->(tag_name) {
+  def self.tagged_with(tag_name)
     Tag.find_by(name: tag_name).articles
-  }
+  end
 
   def tag_list
     self.tags.map(&:name)
