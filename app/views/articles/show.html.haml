@@ -5,7 +5,7 @@
         .col-sm-9
           %h1.article-title= @article.title
           .tag-area
-            -@article.tag_list.each do |tag|
+            - @article.tag_list.each do |tag|
               %span.label.label-info= link_to tag, tag_path(tag)
           .article-contorl
             = link_to_user_with_avatar(@article.author, 25)
