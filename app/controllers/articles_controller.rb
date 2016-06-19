@@ -55,7 +55,7 @@ class ArticlesController < ApplicationController
 
   def check_author
     if @article.author != current_user
-      redirect_to @article, notice: 'この記事を編集できるのは著者のみです'
+      redirect_to @article, notice: '権限がありません'
     end
   end
 
