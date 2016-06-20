@@ -2,6 +2,6 @@
   #{link_to @user.name, @user} / 投稿
 
 .activities
-  = render partial: @articles
+  = render @articles
 
 = paginate @articles

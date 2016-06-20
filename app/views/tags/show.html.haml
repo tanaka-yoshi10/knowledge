@@ -23,7 +23,7 @@
       また#{@tag.users.count}人のユーザーが#{@tag.name}グをフォローしています。
 
   .activities
-    = render partial: Article.tagged_with(@tag.name).published.includes([:author, :tags])
+    = render Article.tagged_with(@tag.name).published.includes([:author, :tags])
 
 -# TODO: paginate
 -# FIXME: カウントがおかしいかも
