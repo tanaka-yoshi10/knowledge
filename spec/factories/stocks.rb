@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :stock do
     user nil
-article nil
+    article nil
   end
-
 end
