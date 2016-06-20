@@ -3,8 +3,8 @@
     .newUserPageProfile-header
       = link_to_user_with_avatar(@user, 270)
 
-      - if @user.profile && (@user.profile.first_name.present? || @user.profile.last_name.present?)
-        %h2= "#{@user.profile.first_name} #{@user.profile.last_name}"
+      - if @user.profile.try!(:full_name).present?
+        %h2= @user.profile.full_name
 
       %h2= "@#{@user.name}"
 
