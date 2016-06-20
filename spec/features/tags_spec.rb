@@ -19,7 +19,7 @@ feature 'Tags' do
   end
 
   scenario 'invalid tag' do
-    visit '/tags/aab'
+    visit tag_path("hoge")
     expect(page.status_code).to eq 404
   end
 end
