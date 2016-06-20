@@ -1,25 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "stocking" do
-    it "stocking?がtrueになること" do
-      user = create(:user)
-      other_user = create(:user)
-      article = create(:article, author: other_user)
+  describe "#stocking?" do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+    let(:article) { create(:article, author: other_user) }
+    subject { user.stocking?(article) }
 
-      user.stock!(article)
-      expect(user.stocking?(article)).to be_truthy
+    context '記事がストックされているとき' do
+      before { user.stock!(article) }
+      it { is_expected.to be_truthy }
     end
 
-    it "stocking?がfalseになること" do
-      user = create(:user)
-      other_user = create(:user)
-      article = create(:article, author: other_user)
-      user.stock!(article)
+    context '記事がストックされていないとき' do
+      it { is_expected.to be_falsey }
+    end
 
-      user.unstock!(article)
-      user.reload #これがないとdestoryが反映されない。もっと良い書き方はないか？
-      expect(user.stocking?(article)).to be_falsey
+    context 'ストック解除されたとき' do
+      before {
+        user.stock!(article)
+        user.unstock!(article)
+      }
+      it { is_expected.to be_falsey }
     end
   end
 
