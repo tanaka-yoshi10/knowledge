@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   end
 
   def stocks
-    @articles = @user.stocking_articles.published.includes([:author, :tags]).page(params[:page])
+    @articles = @user.stocking_articles.published.includes(:author).page(params[:page])
   end
 
   def articles
-    @articles = @user.articles.published.order(created_at: :desc).includes([:author, :tags]).page(params[:page])
+    @articles = @user.articles.published.order(created_at: :desc).includes(:author).page(params[:page])
   end
 
   def followers
