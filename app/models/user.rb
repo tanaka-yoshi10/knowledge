@@ -83,6 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def contribution
+    # Contribution(貢献) = 自分の記事の合計ストック数
     self.articles.joins(:stocks).count
   end
 
