@@ -4,11 +4,11 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
   has_many :articles, through: :taggings, source: :taggable
 
-  scope :most_used_in_published, -> {
+  def self.most_used_in_published
     joins(:articles)
-      .where('articles.status = ?', Article.statuses[:published])
+      .where('articles.status = ?', Article.status.find_value(:published).value)
       .group(:id)
       .select('tags.id, tags.name, COUNT(tags.id) as taggings_count')
       .order('taggings_count DESC')
-  }
+  end
 end

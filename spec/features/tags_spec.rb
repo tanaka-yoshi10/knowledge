@@ -4,6 +4,11 @@ feature 'Tags' do
   let (:user) { create(:user) }
   let (:article) { create(:article, author: user, title: "about iOS") }
 
+  scenario 'show list' do
+    visit tags_path
+    expect(page).to have_content 'タグ一覧'
+  end
+
   scenario 'show tag' do
     visit root_path
     fill_in '名前', with: user.name
