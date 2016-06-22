@@ -1,5 +1,8 @@
-- unless user == current_user
-  - if current_user.try!(:following?, user)
-    = link_to "フォロー解除", user_relationship_path(user), method: :delete, remote: true, class: 'btn btn-default'
-  - else
-    = link_to "フォロー", user_relationship_path(user), method: :post, remote: true, class: 'btn btn-primary'
+- if user_signed_in?
+  - unless user == current_user
+    - if current_user.try!(:following?, user)
+      = link_to "フォロー解除", user_relationship_path(user), method: :delete, remote: true, class: 'btn btn-default'
+    - else
+      = link_to "フォロー", user_relationship_path(user), method: :post, remote: true, class: 'btn btn-primary'
+- else
+  = link_to "フォロー", user_relationship_path(user), method: :post, class: 'btn btn-primary'
