@@ -21,6 +21,7 @@ gem 'kaminari'
 gem 'simple_form'
 gem 'ransack'
 gem 'enumerize'
+gem 'counter_culture', '~> 0.1.33'
 
 group :development, :test do
   gem 'sqlite3'
