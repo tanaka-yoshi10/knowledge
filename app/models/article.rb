@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   belongs_to :author, class_name: User
   has_many :stocks, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :taggings, foreign_key: :taggable_id, dependent: :destroy
+  has_many :taggings, foreign_key: :taggable_id, dependent: :destroy, autosave: true
   has_many :tags, through: :taggings
 
   validates :title, presence: true
@@ -40,17 +40,20 @@ class Article < ActiveRecord::Base
   private
   def add_tags(tags)
     tags.each do |tag_name|
-      tag = Tag.find_or_create_by(name: tag_name)
-      tagging = self.taggings.build(tag: tag)
-      tagging.save # TODO: エラーは無視？
+      tag = Tag.find_or_initialize_by(name: tag_name)
+      self.taggings.build(tag: tag)
     end
   end
 
   def delete_tags(tags)
     tags.each do |tag_name|
       tag = Tag.find_by(name: tag_name)
-      tagging = self.taggings.find_by(tag: tag)
-      tagging.destroy # TODO: エラーは無視？
+
+      # 本当はfind_byにしたかったが、別オブジェクトを生成するためmark_for_destructionが有効にならず
+      # save時にtaggingがdeleteとされなかったためfind_byを諦めた
+      # tagging = self.taggings.find_by(tag: tag)
+      tagging = self.taggings.find{|tagging| tagging.tag_id == tag.id}
+      tagging.mark_for_destruction
     end
   end
 end
