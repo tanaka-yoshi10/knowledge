@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
 
   def self.most_used_in_published
     joins(:articles)
-      .where('articles.status = ?', Article.status.find_value(:published).value)
+      .merge(Article.published)
       .group(:id)
       .select('tags.id, tags.name, COUNT(tags.id) as taggings_count')
       .order('taggings_count DESC')
