@@ -1,7 +1,4 @@
 .userPage_ribbon
   #{link_to @user.name, @user} / 投稿
 
-.activities
-  = render @articles
-
-= paginate @articles
+= render 'articles/activities', articles: @articles
