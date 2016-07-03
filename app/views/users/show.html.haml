@@ -12,7 +12,7 @@
         = render 'follow_form', user: @user
 
     .user-page-profile
-      - if @user.profile
+      - if @user.profile.present?
         - profile = @user.profile
         .user-page-profile-info
           #{profile.introduction}
