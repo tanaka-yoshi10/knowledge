@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def articles
-    @articles = @user.articles.published.order(created_at: :desc).includes(:author).page(params[:page])
+    @articles = @user.articles.published.includes(:author).page(params[:page])
   end
 
   def followers

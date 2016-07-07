@@ -12,6 +12,7 @@ class Article < ActiveRecord::Base
   validates :author, presence: true
 
   enumerize :status, in: { draft: 0, published: 1 }, scope: true, predicates: true
+  default_scope -> { order(created_at: :desc) }
   scope :published, -> { with_status(:published) }
   scope :draft, -> { with_status(:draft) }
 
