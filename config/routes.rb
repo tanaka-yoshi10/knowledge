@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
     resource :relationship, only: [:create, :destroy], path: 'follow'
   end
-  resource :profile, only: [:new, :create, :edit, :update]
+  resource :profile, only: [:edit, :update]
 
   resources :tags, only: [:show, :index], param: :name do
     resource :tagfollow, only: [:create, :destroy], path: 'follow'
