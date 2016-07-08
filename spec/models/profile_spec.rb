@@ -12,21 +12,21 @@ RSpec.describe Profile, type: :model do
     end
 
     context "名のみの場合" do
-      let(:profile) { create(:profile, first_name: "First") }
+      let(:profile) { create(:profile, first_name: "First", last_name: "") }
       it "スペースが入らないこと" do
         is_expected.to eq "First"
       end
     end
 
     context "姓のみの場合" do
-      let(:profile) { create(:profile, last_name: "Last") }
+      let(:profile) { create(:profile, first_name: "", last_name: "Last") }
       it "スペースが入らないこと" do
         is_expected.to eq "Last"
       end
     end
 
     context "両方空の場合" do
-      let(:profile) { create(:profile) }
+      let(:profile) { create(:profile, first_name: "", last_name: "") }
       it "空になること" do
         expect(profile.full_name.blank?).to be_truthy
       end
