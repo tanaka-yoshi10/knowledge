@@ -1,7 +1,7 @@
 / form_forは単数形のパスを生成してくれないため、urlを指定している
 / http://qiita.com/yoskmr/items/cc8a2dc51c928aa1c87a
 / http://railsguides.jp/routing.html#単数形リソース
-= simple_form_for @profile, :url => profile_path do |f|
+= simple_form_for @profile, url: profile_path do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :blog_url
