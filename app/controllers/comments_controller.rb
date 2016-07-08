@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_article
   before_action :set_comment, except: [:create]
   before_action :authenticate_user!
+  before_action :comment_owner!, only: [:destroy]
 
   def create
     @comment = @article.comments.build(comment_params)
@@ -14,10 +15,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if @comment.user == current_user && @comment.destroy
-    else
-      render :error
-    end
+    @comment.destroy
   end
 
   private
@@ -31,5 +29,11 @@ class CommentsController < ApplicationController
 
     def comment_params
       params.require(:comment).permit(:body, :article_id)
+    end
+
+    def comment_owner!
+      if @comment.user != current_user
+        render :status => :forbidden
+      end
     end
 end
