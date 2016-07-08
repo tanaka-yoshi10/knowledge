@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:twitter, :github]
 
-  has_many :articles, foreign_key: :author_id
+  has_many :articles, foreign_key: :author_id, dependent: :destroy
   has_many :stocks, dependent: :destroy
   has_many :relationships, foreign_key: :follower_id, dependent: :destroy
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
-    where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
       user.name = auth.info.nickname
       user.email = auth.info.email
     end
@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
   end
 
   def unstock!(article)
-    stocks.find_by(article: article).destroy
+    stocks.find_by(article: article).destroy!
   end
 
   def stocking?(article)
-    stocks.find_by(article: article).present?
+    stocks.exists?(article: article)
   end
 
   def follow!(other_user)
@@ -63,11 +63,11 @@ class User < ActiveRecord::Base
   end
 
   def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
+    relationships.find_by(followed_id: other_user.id).destroy!
   end
 
   def following?(other_user)
-    relationships.find_by(followed_id: other_user.id).present?
+    relationships.exists?(followed_id: other_user.id)
   end
 
   def follow_tag!(tag)
@@ -79,10 +79,11 @@ class User < ActiveRecord::Base
   end
 
   def following_tag?(tag)
-    tagfollows.find_by(tag: tag).present?
+    tagfollows.exists?(tag: tag)
   end
 
   def contribution
+    # Contribution(貢献) = 自分の記事の合計ストック数
     self.articles.joins(:stocks).count
   end
 

@@ -7,7 +7,7 @@
   .field
     = f.label :email
     %br/
-    = f.email_field :email, autofocus: true
+    = f.email_field :email
   - if f.object.password_required?
     .field
       = f.label :password

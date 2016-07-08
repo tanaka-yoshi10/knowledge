@@ -1,30 +1,31 @@
 .row.user-page
   .col-md-3.col-sm-3.col-xs-12.newUserPageProfile
     .newUserPageProfile-header
-      = avatar_image_tag(@user, 270)
+      = link_to_user_with_avatar(@user, 270)
 
-      - if @user.profile && (@user.profile.first_name.present? || @user.profile.last_name.present?)
-        %h2= "#{@user.profile.first_name} #{@user.profile.last_name}"
+      - if @user.profile.try!(:full_name).present?
+        %h2= @user.profile.full_name
 
       %h2= "@#{@user.name}"
 
       .user-follow-form
-        = render partial: 'follow_form', locals: {user: @user}
+        = render 'follow_form', user: @user
 
     .user-page-profile
-      - if @user.profile.try!(:introduction).try!(:present?)
+      - if @user.profile.present?
+        - profile = @user.profile
         .user-page-profile-info
-          #{@user.profile.introduction}
-      .user-page-profile-info
-        - if @user.profile.try!(:blog_url).try!(:present?)
-          .user-page-profile-info-body
-            = link_to @user.profile.blog_url
-        - if @user.profile.try!(:organization).try!(:present?)
-          .user-page-profile-info-body
-            #{@user.profile.organization}
-        - if @user.profile.try!(:qiita_id).try!(:present?)
-          .user-page-profile-info-body
-            = link_to 'Qiita', "http://qiita.com/#{@user.profile.qiita_id}"
+          #{profile.introduction}
+        .user-page-profile-info
+          - if profile.blog_url.present?
+            .user-page-profile-info-body
+              = link_to profile.blog_url
+          - if profile.organization.present?
+            .user-page-profile-info-body
+              #{profile.organization}
+          - if profile.qiita_id.present?
+            .user-page-profile-info-body
+              = link_to 'Qiita', "http://qiita.com/#{profile.qiita_id}"
 
       .user-page-profile-info
         .user-page-profile-info-heading
@@ -42,7 +43,7 @@
             #{@user.followed_users.count}
         .user-page-profile-info-body
           - @user.followed_users.each do |followed_user|
-            = avatar_image_tag(followed_user, 20)
+            = link_to_user_with_avatar(followed_user, 20)
 
       .user-page-profile-info
         .user-page-profile-info-heading
@@ -51,10 +52,10 @@
             #{link_to @user.followers.count, followers_user_path(@user)}
         .user-page-profile-info-body
           - @user.followers.each do |follower|
-            = avatar_image_tag(follower, 20)
+            = link_to_user_with_avatar(follower, 20)
 
   .col-md-9.col-sm-9.col-xs-12
     .activities
-      = render partial: @user.articles.includes([:author, :tags]).order(:created_at).reverse_order.limit(10)
+      = render @user.articles.includes(:author).limit(10)
 
   -# TODO: paginate等の対応

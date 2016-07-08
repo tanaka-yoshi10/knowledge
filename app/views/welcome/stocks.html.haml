@@ -1,6 +1,3 @@
-= render partial: 'welcome/stream_tabs'
+= render 'welcome/stream_tabs'
 
-.activities
-  = render partial: @articles
-
-= paginate @articles
+= render 'articles/activities', articles: @articles

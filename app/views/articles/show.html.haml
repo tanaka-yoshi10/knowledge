@@ -5,10 +5,10 @@
         .col-sm-9
           %h1.article-title= @article.title
           .tag-area
-            -@article.tag_list.each do |tag|
+            - @article.tag_list.each do |tag|
               %span.label.label-info= link_to tag, tag_path(tag)
           .article-contorl
-            = avatar_image_tag(@article.author, 25)
+            = link_to_user_with_avatar(@article.author, 25)
             #{link_to @article.author.name, @article.author}が#{l @article.created_at}に投稿
             - if @article.author == current_user
               = link_to '編集', edit_article_path(@article), :class => 'btn btn-primary'
@@ -18,7 +18,7 @@
             %li #{@article.stocks.count} ストック
             %li #{@article.comments.count} コメント
           .article-stock
-            = render 'stock_form'
+            = render 'stock_form', article: @article
 
 .row
   .container
@@ -37,17 +37,17 @@
               コメントを投稿する
             .comment-form-content
               .form-group
-                = f.text_area :body, class: "form-control", id: "comment_field", placeholder: "コメントを入力してください"
+                = f.text_area :body, class: 'form-control', id: 'comment_field', placeholder: 'コメントを入力してください'
               .actions
                 = f.submit 'Save'
 
     .side-area.col-sm-3
       .article-author
-        = avatar_image_tag(@article.author, 60)
+        = link_to_user_with_avatar(@article.author, 60)
         .article-author-info
           = link_to @article.author.name, @article.author
           %div
             #{@article.author.contribution} contribution
           %div
             .user-follow-form
-              = render partial: 'users/follow_form', locals: {user: @article.author}
+              = render 'users/follow_form', user: @article.author

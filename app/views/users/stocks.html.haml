@@ -1,7 +1,4 @@
 .userPage_ribbon
   #{link_to @user.name, @user} / ストックした投稿
 
-.activities
-  = render partial: @articles
-
-= paginate @articles
+= render 'articles/activities', articles: @articles

@@ -1,12 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
-  before_action :require_draft_author, only: [:show]
+  before_action :require_author_if_draft, only: [:show]
   before_action :check_author, only: [:edit, :update, :destroy]
 
   def index
     @q = Article.ransack(params[:q])
-    @articles = @q.result(distinct: true).published.order(:created_at).reverse_order.includes([:author, :tags]).page(params[:page])
+    @articles = @q.result.published.includes(:author).page(params[:page])
   end
 
   def show
@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def require_draft_author
+  def require_author_if_draft
     if @article.draft? && @article.author != current_user
       redirect_to root_url, notice: 'この記事は下書きです'
     end
@@ -55,7 +55,7 @@ class ArticlesController < ApplicationController
 
   def check_author
     if @article.author != current_user
-      redirect_to @article, notice: 'この記事を編集できるのは著者のみです'
+      redirect_to @article, notice: '権限がありません'
     end
   end
 

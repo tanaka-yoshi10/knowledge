@@ -14,9 +14,9 @@ feature 'User management' do
 
   scenario 'show user' do
     user = create(:user)
-    article = create(:article, author: user)
+    create(:article, author: user, title: "About something")
 
     visit user_path(user)
-    expect(page).to have_content 'MyString'
+    expect(page).to have_content "About something"
   end
 end
