@@ -58,6 +58,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'erb2haml'
   gem 'quiet_assets'
+  gem 'capistrano'
 end
 
 group :test do
