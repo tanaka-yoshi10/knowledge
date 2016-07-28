@@ -58,6 +58,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'erb2haml'
   gem 'quiet_assets'
+  gem 'capistrano'
 end
 
 group :test do
@@ -67,4 +68,8 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+end
+
+group :staging do
+  gem 'unicorn'
 end
